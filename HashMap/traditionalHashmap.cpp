@@ -98,8 +98,18 @@ public:
         }
         cout << "Key not found for deletion!" << endl;
     }
-
-    // Display the HashMap
+    /**
+     * @brief Displays the content of the HashMap.
+     *
+     * This function iterates through each bucket of the hash table and prints the key-value pairs
+     * present in each bucket. It helps visualize the current state of the HashMap and its contents.
+     * The output will show the index of each bucket followed by the key-value pairs stored in it.
+     *
+     * @note This function is mainly for debugging purposes, and the output will be shown on the console.
+     *
+     * @see put() to add key-value pairs to the HashMap.
+     * @see remove() to delete key-value pairs from the HashMap.
+     */
     void display() const
     {
         for (int i = 0; i < TABLE_SIZE; ++i)
@@ -122,7 +132,17 @@ int main()
     hashMap.insert("Alice", 25);
     hashMap.insert("Bob", 30);
     hashMap.insert("Charlie", 35);
-    hashMap.insert("Dave", 40);
+    hashMap.insert("Dave", 12);
+    hashMap.insert("David", 11);
+    hashMap.insert("Daver", 15);
+    hashMap.insert("Davera", 20);
+    hashMap.insert("Daveo", 13);
+    hashMap.insert("Daven", 17);
+    hashMap.insert("Daved", 19);
+    hashMap.insert("Daveja", 21);
+    hashMap.insert("Davebo", 22);
+    hashMap.insert("Davemin", 27);
+    hashMap.insert("Davelop", 29);
 
     // Display the HashMap
     cout << "HashMap Contents:" << endl;
