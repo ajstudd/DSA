@@ -27,6 +27,9 @@ void addItem(Node *&head, int val)
     iterate->next = temp; // Attach the new node to the end of the list
 }
 
+// INFO: if you see linked list as NULL->1->2->3->4->5->NULL
+//  we're doing NULL<-1<-2<-3<-4<-5<-NULL and our pointer will be at last at the end, then we will start from the end.
+// We just reversed the arrows/pointers
 Node *reverseIterative(Node *head)
 {
     Node *prev = NULL;
