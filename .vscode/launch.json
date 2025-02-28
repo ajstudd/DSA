@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/j7654/DSA/Challenges",
-      "program": "c:/Users/j7654/DSA/Challenges/build/Debug/outDebug",
+      "cwd": "c:/Users/j7654/DSA/Training/Recursion",
+      "program": "c:/Users/j7654/DSA/Training/Recursion/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
