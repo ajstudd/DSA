@@ -45,25 +45,48 @@ void postorderTraversal(TreeNode *root)
 void levelOrderTraversal(TreeNode *root)
 {
     if (!root)
-        return; // If the tree is empty, return
-
-    queue<TreeNode *> q; // Queue to store nodes for BFS
-    q.push(root);        // Start with the root node
+        return;
+    queue<TreeNode *> q;
+    q.push(root);
 
     while (!q.empty())
     {
-        TreeNode *current = q.front(); // Get the front node
-        q.pop();                       // Remove it from the queue
+        TreeNode *current = q.front();
+        q.pop();
 
-        cout << current->val << " "; // Visit the node
+        cout << current->val << " ";
 
-        // Add the left and right children to the queue if they exist
         if (current->left)
             q.push(current->left);
         if (current->right)
             q.push(current->right);
     }
 }
+
+// my attempt , incorrect
+// void levelOrderTraversal(TreeNode *root)
+// {
+//     if (!root)
+//         return;
+
+//     queue<TreeNode *> q;
+
+//     if (root->left)
+//     {
+//         q.push(root->left);
+//     }
+//     if (root->right)
+//     {
+//         q.push(root->right);
+//     }
+//     cout << root->val;
+
+//     while (!q.empty())
+//     {
+//         levelOrderTraversal(q.front());
+//         q.pop();
+//     }
+// }
 
 int main()
 {

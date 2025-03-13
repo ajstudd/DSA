@@ -69,9 +69,7 @@ void levelOrderTraversal(TreeNode *root)
     {
         TreeNode *current = q.front();
         q.pop();
-
         cout << current->val << " "; // Print the current node's value
-
         // Add left and right children to the queue if they exist
         if (current->left)
             q.push(current->left);
