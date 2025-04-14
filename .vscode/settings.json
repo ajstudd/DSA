@@ -60,6 +60,9 @@
     "vector": "cpp",
     "iostream": "cpp",
     "functional": "cpp",
-    "*.tcc": "cpp"
+    "*.tcc": "cpp",
+    "bitset": "cpp",
+    "string_view": "cpp",
+    "regex": "cpp"
   }
 }
