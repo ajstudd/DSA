@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/j7654/DSA/Maths",
-      "program": "c:/Users/j7654/DSA/Maths/build/Debug/outDebug",
+      "cwd": "c:/Users/j7654/DSA/Recursion",
+      "program": "c:/Users/j7654/DSA/Recursion/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
