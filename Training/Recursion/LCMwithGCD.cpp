@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+// LCM of two nums * HCF of Two nums = Product of Two Nums
+
 int GCDFinder(int a, int b)
 {
     if (b == 0)
@@ -10,6 +12,11 @@ int GCDFinder(int a, int b)
     // OPTIMIZE:
     //  return GCDFinder(max(a, b), min(a, b));
     return GCDFinder(max(a, b), min(a, b) % max(a, b));
+    //*-> this is basically   if (a < b)
+    // {
+    //     return GCDFinder(b, a);
+    // }
+    // return GCDFinder(b, a % b);
 }
 
 int main()

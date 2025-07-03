@@ -21,15 +21,10 @@ bool isConnectedAfterRemovingEdge(vector<vector<int>> &adj, int V, int u, int v)
     // Remove edge u-v temporarily
     adj[u].erase(remove(adj[u].begin(), adj[u].end(), v), adj[u].end());
     adj[v].erase(remove(adj[v].begin(), adj[v].end(), u), adj[v].end());
-
     vector<bool> visited(V, false);
     dfs(0, adj, visited);
-
-    // Restore edge u-v
     adj[u].push_back(v);
     adj[v].push_back(u);
-
-    // Check if all nodes are visited
     for (bool vis : visited)
     {
         if (!vis)
@@ -45,7 +40,7 @@ void findBridges(int V, vector<vector<int>> &adj)
         for (int v : adj[u])
         {
             if (u < v)
-            { // To avoid duplicate checking
+            {
                 if (!isConnectedAfterRemovingEdge(adj, V, u, v))
                 {
                     cout << "Bridge found: " << u << " - " << v << endl;
