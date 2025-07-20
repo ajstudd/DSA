@@ -13,14 +13,15 @@ public:
         rank.resize(n, 0); // Initially all ranks are 0
         for (int i = 0; i < n; i++)
             parent[i] = i; // Each node is its own parent
+        // can use: iota(parent.begin(),parent.end(),0);
     }
 
     // Path Compression (directly connecting to ultimate parent)
-    int find(int x)
+    int find(int node)
     {
-        if (parent[x] != x)
-            parent[x] = find(parent[x]); // Flatten the tree
-        return parent[x];
+        if (parent[node] != node)
+            parent[node] = find(parent[node]); // Flatten the tree
+        return parent[node];
     }
 
     // Union by Rank

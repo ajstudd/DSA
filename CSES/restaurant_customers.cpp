@@ -33,25 +33,36 @@ using namespace std;
 // }
 
 // optimised version
+#include <iostream>
+#include <map>
+using namespace std;
+
 int main()
 {
-    int size;
-    cin >> size;
-    map<int, int> events;
-    for (int i = 0; i < size; i++)
+    int numberOfCustomers;
+    cin >> numberOfCustomers;
+
+    map<int, int> customerChanges;
+
+    for (int i = 0; i < numberOfCustomers; i++)
     {
-        int a, b;
-        cin >> a >> b;
-        events[a] += 1;
-        events[b + 1] -= 1;
+        int arrivalTime, departureTime;
+        cin >> arrivalTime >> departureTime;
+
+        customerChanges[arrivalTime] += 1;
+        customerChanges[departureTime + 1] -= 1;
     }
-    int maxCustomers = 0, current = 0;
-    for (auto &[time, delta] : events)
+
+    int maxCustomersInside = 0;
+    int currentCustomersInside = 0;
+
+    for (auto &[time, changeInCustomers] : customerChanges)
     {
-        current += delta;
-        maxCustomers = max(maxCustomers, current);
+        currentCustomersInside += changeInCustomers;
+        maxCustomersInside = max(maxCustomersInside, currentCustomersInside);
     }
-    cout << maxCustomers;
+
+    cout << maxCustomersInside;
 
     return 0;
 }

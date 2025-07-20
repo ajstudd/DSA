@@ -23,6 +23,7 @@ int main()
 {
     int a, b;
     cin >> a >> b;
+    // LCM = a*b / HCF of a and b;
     cout << ((a * b) / GCDFinder(a, b));
     return 0;
 }
