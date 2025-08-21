@@ -1,14 +1,14 @@
 #include <iostream>
 #include <climits> // For INT_MIN
-
+using namespace std;
 int maxSubarraySum(int arr[], int n)
 {
     int maxSum = arr[0], currentSum = arr[0];
 
     for (int i = 1; i < n; i++)
     {
-        currentSum = std::max(arr[i], currentSum + arr[i]); // Extend or start new subarray
-        maxSum = std::max(maxSum, currentSum);              // Update max sum
+        currentSum = max(arr[i], currentSum + arr[i]);
+        maxSum = max(maxSum, currentSum);
     }
 
     return maxSum;

@@ -2039,6 +2039,7 @@ public:
 
 ```cpp
 #include <deque>
+using namespace std;
 
 class SlidingWindowMaximum {
 public:
@@ -3218,6 +3219,7 @@ public:
 ```cpp
 #include <mutex>
 #include <condition_variable>
+using namespace std;
 
 template<typename T>
 class ThreadSafeStack {
@@ -3849,10 +3851,11 @@ graph LR
 #include <iostream>
 #include <vector>
 #include <stdexcept>
+using namespace std;
 
 class Queue {
 private:
-    std::vector<int> arr;
+    vector<int> arr;
     int frontIndex;
     int rearIndex;
     int capacity;
@@ -3866,7 +3869,7 @@ public:
     // Add element to rear of queue
     void enqueue(int element) {
         if (isFull()) {
-            throw std::overflow_error("Queue is full");
+            throw overflow_error("Queue is full");
         }
         rearIndex = (rearIndex + 1) % capacity; // Circular increment
         arr[rearIndex] = element;
@@ -3876,7 +3879,7 @@ public:
     // Remove and return front element
     int dequeue() {
         if (isEmpty()) {
-            throw std::underflow_error("Queue is empty");
+            throw underflow_error("Queue is empty");
         }
         int element = arr[frontIndex];
         frontIndex = (frontIndex + 1) % capacity; // Circular increment
@@ -3887,7 +3890,7 @@ public:
     // Get front element without removing
     int front() const {
         if (isEmpty()) {
-            throw std::underflow_error("Queue is empty");
+            throw underflow_error("Queue is empty");
         }
         return arr[frontIndex];
     }
@@ -3906,16 +3909,16 @@ public:
 
     void display() const {
         if (isEmpty()) {
-            std::cout << "Queue is empty\n";
+            cout << "Queue is empty\n";
             return;
         }
 
-        std::cout << "Queue: ";
+        cout << "Queue: ";
         for (int i = 0; i < currentSize; i++) {
             int index = (frontIndex + i) % capacity;
-            std::cout << arr[index] << " ";
+            cout << arr[index] << " ";
         }
-        std::cout << "\n";
+        cout << "\n";
     }
 };
 
@@ -3928,8 +3931,8 @@ int main() {
     q.enqueue(30);
     q.display(); // Output: Queue: 10 20 30
 
-    std::cout << "Front element: " << q.front() << std::endl; // 10
-    std::cout << "Dequeued: " << q.dequeue() << std::endl;    // 10
+    cout << "Front element: " << q.front() << endl; // 10
+    cout << "Dequeued: " << q.dequeue() << endl;    // 10
     q.display(); // Output: Queue: 20 30
 
     return 0;
@@ -3995,7 +3998,7 @@ graph TB
 ```cpp
 class CircularQueue {
 private:
-    std::vector<int> arr;
+    vector<int> arr;
     int front, rear;
     int capacity;
 
@@ -4006,7 +4009,7 @@ public:
 
     void enqueue(int element) {
         if (isFull()) {
-            throw std::overflow_error("Circular Queue is full");
+            throw overflow_error("Circular Queue is full");
         }
         arr[rear] = element;
         rear = (rear + 1) % capacity;
@@ -4014,7 +4017,7 @@ public:
 
     int dequeue() {
         if (isEmpty()) {
-            throw std::underflow_error("Circular Queue is empty");
+            throw underflow_error("Circular Queue is empty");
         }
         int element = arr[front];
         front = (front + 1) % capacity;
@@ -4062,14 +4065,15 @@ graph TD
 ```cpp
 #include <queue>
 #include <vector>
+using namespace std;
 
 // Custom comparator for priority queue
 struct Task {
     int id;
     int priority;
-    std::string description;
+    string description;
 
-    Task(int i, int p, std::string desc) : id(i), priority(p), description(desc) {}
+    Task(int i, int p, string desc) : id(i), priority(p), description(desc) {}
 };
 
 struct TaskComparator {
@@ -4080,16 +4084,16 @@ struct TaskComparator {
 
 class TaskScheduler {
 private:
-    std::priority_queue<Task, std::vector<Task>, TaskComparator> pq;
+    priority_queue<Task, vector<Task>, TaskComparator> pq;
 
 public:
-    void addTask(int id, int priority, std::string description) {
+    void addTask(int id, int priority, string description) {
         pq.push(Task(id, priority, description));
     }
 
     Task getNextTask() {
         if (pq.empty()) {
-            throw std::runtime_error("No tasks available");
+            throw runtime_error("No tasks available");
         }
         Task nextTask = pq.top();
         pq.pop();
@@ -4129,10 +4133,11 @@ graph LR
 
 ```cpp
 #include <deque>
+using namespace std;
 
 class AdvancedDeque {
 private:
-    std::deque<int> dq;
+    deque<int> dq;
 
 public:
     // Front operations
@@ -4142,7 +4147,7 @@ public:
 
     int popFront() {
         if (dq.empty()) {
-            throw std::underflow_error("Deque is empty");
+            throw underflow_error("Deque is empty");
         }
         int element = dq.front();
         dq.pop_front();
@@ -4156,7 +4161,7 @@ public:
 
     int popRear() {
         if (dq.empty()) {
-            throw std::underflow_error("Deque is empty");
+            throw underflow_error("Deque is empty");
         }
         int element = dq.back();
         dq.pop_back();
@@ -4166,14 +4171,14 @@ public:
     // Access operations
     int front() const {
         if (dq.empty()) {
-            throw std::underflow_error("Deque is empty");
+            throw underflow_error("Deque is empty");
         }
         return dq.front();
     }
 
     int rear() const {
         if (dq.empty()) {
-            throw std::underflow_error("Deque is empty");
+            throw underflow_error("Deque is empty");
         }
         return dq.back();
     }
@@ -4344,9 +4349,10 @@ graph LR
 ```cpp
 #include <queue>
 #include <iostream>
+using namespace std;
 
 void demonstrateSTLQueue() {
-    std::queue<int> q;
+    queue<int> q;
 
     // Enqueue operations
     q.push(10);
@@ -4418,23 +4424,24 @@ graph TD
 #include <queue>
 #include <mutex>
 #include <condition_variable>
+using namespace std;
 
 template<typename T>
 class ThreadSafeQueue {
 private:
-    mutable std::mutex mtx;
-    std::queue<T> dataQueue;
-    std::condition_variable condition;
+    mutable mutex mtx;
+    queue<T> dataQueue;
+    condition_variable condition;
 
 public:
     void enqueue(T element) {
-        std::lock_guard<std::mutex> lock(mtx);
+        lock_guard<mutex> lock(mtx);
         dataQueue.push(element);
         condition.notify_one();
     }
 
     bool tryDequeue(T& result) {
-        std::lock_guard<std::mutex> lock(mtx);
+        lock_guard<mutex> lock(mtx);
         if (dataQueue.empty()) {
             return false;
         }
@@ -4444,7 +4451,7 @@ public:
     }
 
     void waitAndDequeue(T& result) {
-        std::unique_lock<std::mutex> lock(mtx);
+        unique_lock<mutex> lock(mtx);
         while (dataQueue.empty()) {
             condition.wait(lock);
         }
@@ -4453,12 +4460,12 @@ public:
     }
 
     bool empty() const {
-        std::lock_guard<std::mutex> lock(mtx);
+        lock_guard<mutex> lock(mtx);
         return dataQueue.empty();
     }
 
     size_t size() const {
-        std::lock_guard<std::mutex> lock(mtx);
+        lock_guard<mutex> lock(mtx);
         return dataQueue.size();
     }
 };
@@ -4503,12 +4510,13 @@ public:
 
 ```cpp
 #include <deque>
+using namespace std;
 
 class MinMaxQueue {
 private:
-    std::deque<int> data;
-    std::deque<int> minDeque; // Stores indices for minimum elements
-    std::deque<int> maxDeque; // Stores indices for maximum elements
+    deque<int> data;
+    deque<int> minDeque; // Stores indices for minimum elements
+    deque<int> maxDeque; // Stores indices for maximum elements
 
 public:
     void enqueue(int element) {
@@ -4654,10 +4662,11 @@ public:
 #include <vector>
 #include <queue>
 #include <unordered_set>
+using namespace std;
 
 class Graph {
 private:
-    std::vector<std::vector<int>> adjList;
+    vector<vector<int>> adjList;
     int vertices;
 
 public:
@@ -4671,18 +4680,18 @@ public:
     }
 
     void bfs(int startVertex) {
-        std::vector<bool> visited(vertices, false);
-        std::queue<int> bfsQueue;
+        vector<bool> visited(vertices, false);
+        queue<int> bfsQueue;
 
         visited[startVertex] = true;
         bfsQueue.push(startVertex);
 
-        std::cout << "BFS Traversal: ";
+        cout << "BFS Traversal: ";
 
         while (!bfsQueue.empty()) {
             int currentVertex = bfsQueue.front();
             bfsQueue.pop();
-            std::cout << currentVertex << " ";
+            cout << currentVertex << " ";
 
             // Visit all adjacent vertices
             for (int neighbor : adjList[currentVertex]) {
@@ -4742,26 +4751,27 @@ public:
 ```cpp
 #include <chrono>
 #include <thread>
+using namespace std;
 
 struct HTTPRequest {
     int requestId;
-    std::string clientIP;
-    std::string requestPath;
-    std::chrono::steady_clock::time_point timestamp;
+    string clientIP;
+    string requestPath;
+    chrono::steady_clock::time_point timestamp;
 
-    HTTPRequest(int id, std::string ip, std::string path)
+    HTTPRequest(int id, string ip, string path)
         : requestId(id), clientIP(ip), requestPath(path) {
-        timestamp = std::chrono::steady_clock::now();
+        timestamp = chrono::steady_clock::now();
     }
 };
 
 class WebServerQueue {
 private:
-    std::queue<HTTPRequest> requestQueue;
-    std::mutex queueMutex;
-    std::condition_variable cv;
+    queue<HTTPRequest> requestQueue;
+    mutex queueMutex;
+    condition_variable cv;
     bool isRunning;
-    std::thread workerThread;
+    thread workerThread;
 
 public:
     WebServerQueue() : isRunning(true) {
@@ -4834,12 +4844,13 @@ private:
 ```cpp
 #include <deque>
 #include <vector>
+using namespace std;
 
 class SlidingWindowMaximum {
 public:
-    std::vector<int> maxSlidingWindow(std::vector<int>& nums, int k) {
-        std::deque<int> dq; // Stores indices
-        std::vector<int> result;
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        deque<int> dq; // Stores indices
+        vector<int> result;
 
         for (int i = 0; i < nums.size(); i++) {
             // Remove indices that are out of current window

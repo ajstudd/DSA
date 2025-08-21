@@ -6,7 +6,7 @@ using namespace std;
 
 void main()
 {
-    int num = 12;
+    int num = 123456;
     cout << num << endl;
     string sNum = to_string(num);
     cout << sNum << endl;

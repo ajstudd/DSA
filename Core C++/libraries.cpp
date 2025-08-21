@@ -156,16 +156,40 @@ int main()
     queue<int> q;
     q.push(1); // Add to queue
     q.push(2);
-    q.pop();           // Remove from queue
-    cout << q.front(); // Access front element
+    q.push(3);
+    cout << "Queue size: " << q.size() << endl;
     cout << "Queue front: " << q.front() << endl;
+    cout << "Queue back: " << q.back() << endl;
+
+    q.pop(); // Remove from queue
+    cout << "After pop, queue front: " << q.front() << endl;
+    cout << "Queue empty: " << (q.empty() ? "Yes" : "No") << endl;
+
+    // Empty the queue
+    while (!q.empty())
+    {
+        q.pop();
+    }
+    cout << "After emptying, queue empty: " << (q.empty() ? "Yes" : "No") << endl;
 
     // stack: LIFO data structure
     stack<int> st;
     st.push(100);
     st.push(200);
-    st.pop(); // remove from stack
+    st.push(300);
+    cout << "Stack size: " << st.size() << endl;
     cout << "Stack top: " << st.top() << endl;
+
+    st.pop(); // remove from stack
+    cout << "After pop, stack top: " << st.top() << endl;
+    cout << "Stack empty: " << (st.empty() ? "Yes" : "No") << endl;
+
+    // Empty the stack
+    while (!st.empty())
+    {
+        st.pop();
+    }
+    cout << "After emptying, stack empty: " << (st.empty() ? "Yes" : "No") << endl;
 
     // unordered_map: Hash map for fast lookup
     unordered_map<string, int> fruit;

@@ -15,6 +15,24 @@ int main()
     int *ptr = arr;      // pointer to first element
     int *ptr2 = &arr[0]; // same as above
 
+    // Sort fixed size array
+    sort(arr, arr + 5);
+
+    // Reverse fixed size array
+    reverse(arr, arr + 5);
+
+    // Sort in descending order
+    sort(arr, arr + 5, greater<int>());
+
+    // Sort auto-sized array
+    sort(arr2, arr2 + 6);
+
+    // Reverse auto-sized array
+    reverse(arr2, arr2 + 6);
+
+    // Sort in descending order
+    sort(arr2, arr2 + 6, greater<int>());
+
     // Loop and update array using pointer
     for (int i = 0; i < 5; i++)
     {
@@ -82,5 +100,15 @@ int main()
 
     // Accumulate (sum)
     int sum = accumulate(v.begin(), v.end(), 0);
+
+    // converting traditional arrays to vector
+    int t_array[] = {1, 2, 3, 4, 5};
+    vector<int> vect(t_array, t_array + sizeof(t_array) / sizeof(t_array[0]));
+
+    // but it will not work with dynamically allocated arrays
+    // because sizeof() does not work correctly on pointers.
+    // If you're working with a pointer (int* arr = new int[5];), you'll need to pass the size manually:
+    int *pointerArr = new int[5]{1, 2, 3, 4, 5};
+    vector<int> vect2(pointerArr, pointerArr + 5); // Manual size
     return 0;
 }

@@ -19,6 +19,7 @@ using namespace std;
  * @note Time complexity: O(n! * n) where n is the length of string
  * @note Space complexity: O(n) for recursion stack depth
  */
+
 void permutations(string &s, int index, vector<string> &perms)
 {
     if (index >= s.length())

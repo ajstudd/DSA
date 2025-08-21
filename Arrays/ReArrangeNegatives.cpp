@@ -8,7 +8,7 @@ void rearrangeAlternate(int arr[], int n)
     {
         if (arr[j] < 0)
         {
-            std::swap(arr[i], arr[j]); // Move negatives to the front
+            std::swap(arr[i], arr[j]);
             i++;
         }
         j++;
