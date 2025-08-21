@@ -10,14 +10,58 @@ int main()
     int arr[5] = {1, 2, 3, 4, 5};
     // array with automatically size set
     int arr2[] = {1, 2, 3, 4, 5, 6};
-    for (const int item : arr2)
+
+    // Array pointers
+    int *ptr = arr;      // pointer to first element
+    int *ptr2 = &arr[0]; // same as above
+
+    // Loop and update array using pointer
+    for (int i = 0; i < 5; i++)
     {
-        cout << item << endl;
+        *(ptr + i) = *(ptr + i) * 2; // multiply each element by 2
     }
-    for (const int item2 : arr)
+
+    // Alternative: using pointer arithmetic
+    int *p = arr;
+    for (int i = 0; i < 5; i++)
     {
-        cout << item2 << endl;
+        *p = *p * 3; // multiply by 3
+        p++;         // move to next element
     }
+
+    // Display updated array
+    cout << "Updated array: ";
+    for (int i = 0; i < 5; i++)
+    {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    // Using pointers to access elements
+    cout << "First element: " << *ptr << endl;
+    cout << "Second element: " << *(ptr + 1) << endl;
+
+    // Dynamic array allocation (resizable)
+    int size = 5;
+    int *dynamicArr = new int[size]{1, 2, 3, 4, 5};
+
+    // Resize by creating new array
+    int newSize = 7;
+    int *resized = new int[newSize];
+    copy(dynamicArr, dynamicArr + size, resized); // copy old data
+    resized[5] = 6;                               // add new elements
+    resized[6] = 7;
+
+    delete[] dynamicArr;  // free old memory
+    dynamicArr = resized; // update pointer
+
+    for (int i = 0; i < newSize; i++)
+    {
+        cout << dynamicArr[i] << " ";
+    }
+    cout << endl;
+
+    delete[] dynamicArr; // cleanup
 
     // LABEL: Dynamic Arrays
     vector<int> v; // dynamic array
