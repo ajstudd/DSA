@@ -89,6 +89,9 @@
 #include <cctype>
 // For character manipulation functions like toupper, tolower.
 
+#include <list>
+// For doubly-linked list container (used to demonstrate linked list search).
+
 using namespace std;
 
 int main()
@@ -499,6 +502,104 @@ int main()
     for (string w : words)
         cout << w << " ";
     cout << endl;
+
+    // === SEARCH EXAMPLES IN COMMON CONTAINERS ===
+    cout << "\n=== Search Examples ===\n";
+
+    // 1. set: O(log n) search using find / count
+    int setTarget = 5;
+    cout << "Searching for " << setTarget << " in set: "
+         << (s1.find(setTarget) != s1.end() ? "Found" : "Not Found") << endl;
+
+    // 2. map: O(log n) search using find
+    string nameTarget = "Bob";
+    auto mit = age.find(nameTarget);
+    if (mit != age.end())
+        cout << "Found key '" << nameTarget << "' with value " << mit->second << " in map" << endl;
+    else
+        cout << "Key '" << nameTarget << "' not found in map" << endl;
+
+    // 3. queue: No direct search (must traverse). Use a copy to preserve original.
+    queue<int> qSearch;
+    qSearch.push(10);
+    qSearch.push(20);
+    qSearch.push(30);
+    qSearch.push(40);
+    int queueTarget = 30;
+    bool foundInQueue = false;
+    {
+        queue<int> tmp = qSearch; // copy
+        while (!tmp.empty())
+        {
+            if (tmp.front() == queueTarget)
+            {
+                foundInQueue = true;
+                break;
+            }
+            tmp.pop();
+        }
+    }
+    cout << "Searching for " << queueTarget << " in queue: " << (foundInQueue ? "Found" : "Not Found") << endl;
+
+    // 4. stack: Also no direct search; traverse a copy (LIFO order).
+    stack<int> stSearch;
+    stSearch.push(5);
+    stSearch.push(10);
+    stSearch.push(15);
+    stSearch.push(20);
+    int stackTarget = 15;
+    bool foundInStack = false;
+    {
+        stack<int> tmp = stSearch; // copy
+        while (!tmp.empty())
+        {
+            if (tmp.top() == stackTarget)
+            {
+                foundInStack = true;
+                break;
+            }
+            tmp.pop();
+        }
+    }
+    cout << "Searching for " << stackTarget << " in stack: " << (foundInStack ? "Found" : "Not Found") << endl;
+
+    // 5. linked list via std::list: O(n) search with std::find
+    list<int> lst = {2, 4, 6, 8, 10};
+    int listTarget = 8;
+    auto lit = find(lst.begin(), lst.end(), listTarget);
+    cout << "Searching for " << listTarget << " in std::list: " << (lit != lst.end() ? "Found" : "Not Found") << endl;
+
+    // 6. Custom singly linked list search (manual traversal)
+    struct Node
+    {
+        int val;
+        Node *next;
+        Node(int v) : val(v), next(nullptr) {}
+    };
+    // Build list 1->3->5->7
+    Node *head = new Node(1);
+    head->next = new Node(3);
+    head->next->next = new Node(5);
+    head->next->next->next = new Node(7);
+    int customTarget = 5;
+    bool foundInCustom = false;
+    for (Node *cur = head; cur; cur = cur->next)
+    {
+        if (cur->val == customTarget)
+        {
+            foundInCustom = true;
+            break;
+        }
+    }
+    cout << "Searching for " << customTarget << " in custom singly linked list: "
+         << (foundInCustom ? "Found" : "Not Found") << endl;
+    // Cleanup allocated nodes
+    while (head)
+    {
+        Node *nxt = head->next;
+        delete head;
+        head = nxt;
+    }
 
     // 10. SLIDING WINDOW TECHNIQUE
     cout << "\n=== Sliding Window Example ===\n";
