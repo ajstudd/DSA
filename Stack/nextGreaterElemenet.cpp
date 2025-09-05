@@ -58,3 +58,11 @@ int main()
     }
     return 0;
 }
+
+/*
+Worst Case Time Complexity: O(n)
+Although there's a nested while loop, each element is pushed and popped at most once.
+The algorithm processes each element exactly once during the main iteration.
+Total stack operations across all iterations: n pushes + at most n pops = O(n).
+This is much better than the naive O(n²) approach of checking each element against all following elements.
+*/

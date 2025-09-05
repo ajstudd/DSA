@@ -60,3 +60,11 @@ public:
         return minimium(nums, start, end, mid);
     }
 };
+
+/*
+Worst Case Time Complexity: O(log n)
+This implements binary search on a rotated sorted array to find the minimum element.
+Each recursive call eliminates half of the search space by comparing mid with start/end.
+The algorithm makes at most log₂(n) recursive calls where n is the array size.
+This is much better than linear search O(n) that would check every element sequentially.
+*/

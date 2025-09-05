@@ -118,3 +118,11 @@ int main()
 
     return 0;
 }
+
+/*
+Worst Case Time Complexity: O(n)
+All traversal algorithms visit each node exactly once, where n is the number of nodes in the tree.
+Inorder, Preorder, and Postorder: Recursive calls create O(h) space complexity where h is tree height.
+Level-order traversal: Uses O(w) space where w is the maximum width of the tree (worst case O(n)).
+For a balanced tree, space complexity is O(log n), but for skewed trees it's O(n).
+*/

@@ -25,3 +25,11 @@ int main()
 
     return 0;
 }
+
+/*
+Worst Case Time Complexity: O(1)
+All basic queue operations (push, pop, front, back) have constant time complexity.
+The STL queue is typically implemented using deque, providing O(1) operations at both ends.
+Creating tuple queue and structured binding operations are also O(1).
+Overall program complexity is O(1) as it performs a fixed number of constant-time operations.
+*/

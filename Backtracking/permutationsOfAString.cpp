@@ -47,3 +47,11 @@ int main()
     }
     return 0;
 }
+
+/*
+Worst Case Time Complexity: O(n! × n)
+The algorithm generates all n! permutations of the string where n is the string length.
+For each permutation, we perform O(n) work to copy the string to the result vector.
+Each recursive level explores n, n-1, n-2, ... 1 possibilities, totaling n! permutations.
+The backtracking ensures we explore every possible arrangement systematically.
+*/

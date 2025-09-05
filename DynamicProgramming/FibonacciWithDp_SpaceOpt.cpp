@@ -21,3 +21,10 @@ int main()
 
     return 0;
 }
+
+/*
+Worst Case Time Complexity: O(n)
+The algorithm runs a single loop from 2 to n, performing constant time operations in each iteration.
+Since we iterate through n-1 elements exactly once, the time complexity is linear with respect to n.
+This is a significant improvement over the naive recursive approach which has O(2^n) complexity.
+*/

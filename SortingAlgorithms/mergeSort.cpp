@@ -68,3 +68,10 @@ int main()
         cout << i << endl;
     return 0;
 }
+
+/*
+Worst Case Time Complexity: O(n log n)
+The algorithm divides the array into halves recursively, creating log n levels of recursion.
+At each level, we perform O(n) work to merge all subarrays at that level.
+Total work = n operations × log n levels = O(n log n), which is optimal for comparison-based sorting.
+*/

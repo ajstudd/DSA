@@ -30,3 +30,11 @@ int main()
     cout << "if " << n << " is prime ? " << (prime[n] == true ? "Yes" : "No");
     return 0;
 }
+
+/*
+Worst Case Time Complexity: O(n log log n)
+The outer loop runs for all numbers from 2 to n.
+For each prime p, the inner loop marks multiples starting from p², running n/p times.
+Total operations: n/2 + n/3 + n/5 + ... (sum over all primes) ≈ n log log n.
+This is much better than checking each number individually with trial division O(n√n).
+*/

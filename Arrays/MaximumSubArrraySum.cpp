@@ -23,3 +23,11 @@ int main()
 
     return 0;
 }
+
+/*
+Worst Case Time Complexity: O(n)
+This implements Kadane's algorithm which processes each array element exactly once.
+In each iteration, we perform constant time operations: two max comparisons and assignments.
+The algorithm scans through the array linearly, making it optimal for the maximum subarray problem.
+This is much better than the O(n³) brute force approach that checks all possible subarrays.
+*/

@@ -48,3 +48,11 @@ int main()
     }
     return 0;
 }
+
+/*
+Worst Case Time Complexity: O(n + m)
+The algorithm uses two-pointer technique to merge two sorted arrays of sizes n and m.
+Main while loop: processes min(n, m) elements with O(1) operations per iteration.
+Remaining elements: copies at most max(n, m) - min(n, m) remaining elements.
+Total: min(n, m) + (n - processed) + (m - processed) = n + m operations.
+*/

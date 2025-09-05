@@ -166,3 +166,11 @@ int main()
 
     return 0;
 }
+
+/*
+Worst Case Time Complexity: O(V + E)
+BFS and DFS both visit each vertex V exactly once and examine each edge E exactly once.
+BFS uses a queue and visits neighbors level by level, ensuring optimal path discovery.
+DFS uses recursion/stack and explores as deep as possible before backtracking.
+Both algorithms have the same time complexity but different space and traversal patterns.
+*/

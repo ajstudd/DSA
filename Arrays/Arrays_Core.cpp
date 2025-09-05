@@ -112,3 +112,10 @@ int main()
     vector<int> vect2(pointerArr, pointerArr + 5); // Manual size
     return 0;
 }
+
+/*
+Worst Case Time Complexity: O(n log n)
+Most operations in this code are O(n) where n is the array size: loops, copying, memory allocation.
+The sorting operations (sort()) dominate with O(n log n) complexity using comparison-based algorithms.
+Individual operations like push_back, pop_back, and element access are O(1) amortized time.
+*/

@@ -85,3 +85,11 @@ int main()
 
     return 0;
 }
+
+/*
+Worst Case Time Complexity: O(n)
+Creating nodes: O(1) for each node creation and initialization.
+Traversal operations: O(n) where n is the number of nodes, as we visit each node once.
+Insertion at end: O(n) to traverse to the last node + O(1) to insert = O(n) total.
+The program performs multiple O(n) traversals, so overall complexity remains O(n).
+*/

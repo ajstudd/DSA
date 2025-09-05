@@ -96,3 +96,12 @@ int main()
 
     return 0;
 }
+
+/*
+Worst Case Time Complexity: O(n log n)
+Basic stack operations (push, pop, top) are O(1) each.
+PrintStack function: O(n) to traverse and O(n) to restore = O(n) total.
+SortStack function: O(n) to transfer + O(n log n) to sort + O(n) to push back = O(n log n).
+ReverseStack function: O(n) to empty + O(n) to refill = O(n) total.
+Overall complexity is dominated by the sorting operation.
+*/

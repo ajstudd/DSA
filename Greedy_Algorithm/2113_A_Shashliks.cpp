@@ -34,3 +34,11 @@ int main()
     }
     return 0;
 }
+
+/*
+Worst Case Time Complexity: O(t)
+The algorithm processes t test cases, each in constant time O(1).
+Each test case involves only basic arithmetic operations, comparisons, and assignments.
+No loops or recursive calls depend on the input values k, a, b, x, y.
+The greedy approach calculates the optimal solution directly without iteration.
+*/

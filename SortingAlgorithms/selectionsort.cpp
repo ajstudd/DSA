@@ -35,3 +35,10 @@ int main()
         cout << array[i] << " ";
     }
 }
+
+/*
+Worst Case Time Complexity: O(n²)
+The outer loop runs n times, and for each iteration, the inner loop runs (n-i-1) times.
+Total comparisons = (n-1) + (n-2) + ... + 1 = n(n-1)/2, which simplifies to O(n²).
+Selection sort always performs the same number of comparisons regardless of input order.
+*/

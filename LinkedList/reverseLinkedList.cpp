@@ -70,3 +70,11 @@ int main()
     iterate(head);
     return 0;
 }
+
+/*
+Worst Case Time Complexity: O(n)
+AddItem function: O(n) to traverse to the end + O(1) to insert = O(n) per insertion.
+ReverseIterative function: O(n) to visit each node exactly once and reverse pointers.
+Iterate function: O(n) to traverse through all n nodes for printing.
+The main function adds 7 items, so total complexity is O(7n) + O(n) + O(n) = O(n).
+*/

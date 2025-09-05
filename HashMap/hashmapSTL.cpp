@@ -62,3 +62,12 @@ int main()
 
     return 0;
 }
+
+/*
+Worst Case Time Complexity: O(n log n)
+Basic HashMap operations (insert, search, delete, access) are O(1) average, O(n) worst case.
+Traversing the HashMap takes O(n) time where n is the number of elements.
+Sorting the vector of pairs dominates with O(n log n) complexity.
+Creating the reversed map requires O(n) time for iteration and insertions.
+Overall complexity is determined by the sorting step.
+*/
