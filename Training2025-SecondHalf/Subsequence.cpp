@@ -19,7 +19,7 @@ void findSubsequences(int index, vector<int> &current, const vector<int> &arr, v
 
 int main()
 {
-    vector<int> arr = {1, 2, 3, 4};
+    vector<int> arr = {1, 2, 3};
     vector<vector<int>> result;
     vector<int> current;
     findSubsequences(0, current, arr, result);
