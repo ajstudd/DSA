@@ -60,26 +60,78 @@ int main()
     cout << "Second element: " << *(ptr + 1) << endl;
 
     // Dynamic array allocation (resizable)
-    int size = 5;
-    int *dynamicArr = new int[size]{1, 2, 3, 4, 5};
+    int size = 5;                                   // Original array size
+    int *dynamicArr = new int[size]{1, 2, 3, 4, 5}; // Allocate memory on heap and initialize
+                                                    // 'new int[size]' allocates 5*sizeof(int) bytes
+                                                    // Returns pointer to first element
+                                                    // Memory layout: [1][2][3][4][5] at some heap address
 
-    // Resize by creating new array
-    int newSize = 7;
-    int *resized = new int[newSize];
-    copy(dynamicArr, dynamicArr + size, resized); // copy old data
-    resized[5] = 6;                               // add new elements
-    resized[6] = 7;
+    cout << "Original array address: " << dynamicArr << endl;
+    cout << "Original array contents: ";
+    for (int i = 0; i < size; i++)
+        cout << dynamicArr[i] << " ";
+    cout << endl;
 
-    delete[] dynamicArr;  // free old memory
-    dynamicArr = resized; // update pointer
+    // Resize by creating new array (C++ arrays can't be resized directly)
+    int newSize = 7;                 // Target size is larger than original
+    int *resized = new int[newSize]; // Allocate NEW memory block on heap (7*sizeof(int) bytes)
+                                     // This is a DIFFERENT memory location from dynamicArr
+                                     // Memory layout: [garbage][garbage][garbage][garbage][garbage][garbage][garbage]
 
+    cout << "New array address: " << resized << endl;
+    cout << "Addresses are different: " << (dynamicArr != resized ? "Yes" : "No") << endl;
+
+    // Copy existing data from old array to new array
+    copy(dynamicArr, dynamicArr + size, resized); // STL algorithm copies elements [0] to [4]
+                                                  // Source: dynamicArr[0] to dynamicArr[4]
+                                                  // Destination: resized[0] to resized[4]
+                                                  // After copy: resized = [1][2][3][4][5][garbage][garbage]
+
+    cout << "After copying old data: ";
+    for (int i = 0; i < newSize; i++)
+        cout << resized[i] << " ";
+    cout << endl;
+
+    // Initialize the new elements that weren't in original array
+    resized[5] = 6; // Set 6th element (index 5)
+    resized[6] = 7; // Set 7th element (index 6)
+                    // Now: resized = [1][2][3][4][5][6][7]
+
+    cout << "After adding new elements: ";
+    for (int i = 0; i < newSize; i++)
+        cout << resized[i] << " ";
+    cout << endl;
+
+    // Memory management: Clean up old array
+    delete[] dynamicArr; // FREE the original memory block
+                         // The memory that dynamicArr pointed to is now deallocated
+                         // dynamicArr still holds the old address but it's invalid now
+                         // Accessing *dynamicArr after this point = undefined behavior
+
+    cout << "Old array memory freed. Old pointer still points to: " << dynamicArr << " (now invalid)" << endl;
+
+    // Update pointer to point to new array
+    dynamicArr = resized; // dynamicArr now points to the new memory location
+                          // Both dynamicArr and resized point to same memory
+                          // We now have TWO pointers to the SAME memory block
+
+    cout << "dynamicArr now points to: " << dynamicArr << endl;
+    cout << "resized points to: " << resized << endl;
+    cout << "Same address: " << (dynamicArr == resized ? "Yes" : "No") << endl;
+
+    // Display the resized array using the updated pointer
+    cout << "Final resized array: ";
     for (int i = 0; i < newSize; i++)
     {
-        cout << dynamicArr[i] << " ";
+        cout << dynamicArr[i] << " "; // Access through dynamicArr (now points to new array)
     }
     cout << endl;
 
-    delete[] dynamicArr; // cleanup
+    // Final cleanup: Free the new array memory
+    delete[] dynamicArr; // Free the memory that dynamicArr points to
+                         // Since dynamicArr and resized point to same memory,
+                         // this frees the memory allocated for 'resized'
+                         // After this: both dynamicArr and resized are dangling pointers
 
     // LABEL: Dynamic Arrays
     vector<int> v; // dynamic array
