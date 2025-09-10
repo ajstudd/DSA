@@ -10,10 +10,16 @@ class Car
 {
 public:
     static int carCount; // Declaration of static variable
-
+    int publicVal = 8;
     Car()
     {
         carCount++; // Increment count whenever an object is created
+    }
+
+    static void memberfunc()
+    {
+        cout << carCount;
+        // cout << "Public val" << publicVal; INFO: Static member cannot access normal class members
     }
 };
 
@@ -30,6 +36,7 @@ int main()
 {
     Car car1, car2, car3;
     cout << "Total Cars: " << Car::carCount << endl; // Access without an object
+    car1.memberfunc();
 
     return 0;
 }
