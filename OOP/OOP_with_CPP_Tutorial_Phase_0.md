@@ -1162,6 +1162,39 @@ i = 3, j = 7
 i = 4, j = 6
 ```
 
+**For Loop Explained:**
+
+**Structure:**
+
+```cpp
+for (initialization; condition; update) {
+    // Loop body
+}
+```
+
+**Execution Order:**
+
+1. **Initialization**: Executed once at the beginning (e.g., `int i = 0`)
+2. **Condition**: Checked before each iteration (e.g., `i < 10`)
+3. **Loop body**: Executed if condition is true
+4. **Update**: Executed after each iteration (e.g., `i++`)
+5. Repeat steps 2-4 until condition is false
+
+**Key Points:**
+
+- All three parts (init, condition, update) are optional: `for(;;)` is an infinite loop
+- Loop variable scope is limited to the loop (can't access `i` after loop ends)
+- Multiple variables possible: `for(int i=0, j=10; i<j; i++, j--)`
+- **Nested loops**: Inner loop completes all iterations for each outer loop iteration
+- Time complexity of nested loops: O(n × m) for n and m iterations
+
+**Common Use Cases:**
+
+- Iterating through arrays/containers
+- Repeating an action a specific number of times
+- Generating sequences or patterns
+- Matrix operations (nested loops)
+
 **While Loop:**
 
 ```cpp
@@ -1205,6 +1238,77 @@ int main() {
     return 0;
 }
 ```
+
+**Sample Output:**
+
+```
+While loop counting:
+Count: 1
+Count: 2
+Count: 3
+Count: 4
+Count: 5
+
+Enter a number between 1 and 10: 15
+Invalid input! Please enter a number between 1 and 10: 5
+Thank you! You entered: 5
+
+Calculating sum of digits of 12345:
+Digit: 5, Running sum: 5
+Digit: 4, Running sum: 9
+Digit: 3, Running sum: 12
+Digit: 2, Running sum: 14
+Digit: 1, Running sum: 15
+Total sum of digits: 15
+```
+
+**While Loop Explained:**
+
+**Structure:**
+
+```cpp
+while (condition) {
+    // Loop body
+}
+```
+
+**Key Characteristics:**
+
+- **Pre-test loop**: Condition checked before each iteration
+- May execute 0 times if condition is initially false
+- Useful when number of iterations is unknown
+- Requires manual initialization and update of loop variable
+
+**Common Patterns:**
+
+1. **Input Validation:**
+
+```cpp
+while (input < min || input > max) {
+    // Re-prompt user
+}
+```
+
+2. **Event-Driven Loop:**
+
+```cpp
+while (!done) {
+    // Process events
+}
+```
+
+3. **Sentinel-Controlled Loop:**
+
+```cpp
+while (value != SENTINEL_VALUE) {
+    // Process value
+}
+```
+
+**For vs While:**
+
+- **Use for**: When you know the number of iterations
+- **Use while**: When iterations depend on a condition, input validation, event-driven scenarios
 
 **Do-While Loop:**
 
@@ -1256,6 +1360,87 @@ int main() {
 
     return 0;
 }
+```
+
+**Sample Output:**
+
+```
+Do-while loop:
+Iteration: 1
+Iteration: 2
+Iteration: 3
+
+--- Menu ---
+1. Say Hello
+2. Display Date
+3. Calculate Square
+0. Exit
+Enter your choice: 1
+Hello, World!
+
+--- Menu ---
+1. Say Hello
+2. Display Date
+3. Calculate Square
+0. Exit
+Enter your choice: 3
+Enter a number: 7
+Square of 7 is 49
+
+--- Menu ---
+1. Say Hello
+2. Display Date
+3. Calculate Square
+0. Exit
+Enter your choice: 0
+Goodbye!
+```
+
+**Do-While Loop Explained:**
+
+**Structure:**
+
+```cpp
+do {
+    // Loop body
+} while (condition);
+```
+
+**Key Characteristics:**
+
+- **Post-test loop**: Condition checked after each iteration
+- **Always executes at least once**, even if condition is false
+- Semicolon required after while condition
+- Perfect for menu systems and input validation
+
+**When to use do-while:**
+
+1. **Menu-driven programs**: Menu must display at least once
+2. **Input validation**: Get input, then validate
+3. **"Try at least once" scenarios**: Execute before checking condition
+
+**While vs Do-While:**
+
+```cpp
+// While loop - may not execute
+while (x > 0) {
+    // Might skip if x <= 0
+}
+
+// Do-while - executes at least once
+do {
+    // Always executes first
+} while (x > 0);
+```
+
+**Common Use Case - Input Validation:**
+
+```cpp
+int input;
+do {
+    cout << "Enter positive number: ";
+    cin >> input;
+} while (input <= 0);  // Keeps asking until valid
 ```
 
 ### 0.3.4 Break and Continue Statements
@@ -1321,6 +1506,60 @@ int main() {
     return 0;
 }
 ```
+
+**Sample Output:**
+
+```
+Finding first multiple of 7 greater than 50:
+Checking: 51
+Checking: 52
+Checking: 53
+Checking: 54
+Checking: 55
+Found: 56
+
+Guess the number (1-100). You have 5 attempts.
+Attempt 1: 50
+Too high!
+Attempt 2: 25
+Too low!
+Attempt 3: 42
+Congratulations! You guessed it in 3 attempts!
+
+Break in nested loops:
+Outer loop: 1
+  Inner loop: 1
+  Inner loop: 2
+  Breaking inner loop at j = 3
+Outer loop: 2
+  Inner loop: 1
+  Inner loop: 2
+  Breaking inner loop at j = 3
+Outer loop: 3
+  Inner loop: 1
+  Inner loop: 2
+  Breaking inner loop at j = 3
+```
+
+**Break Statement Explained:**
+
+**What break does:**
+
+- Immediately exits the innermost loop or switch statement
+- Control transfers to the statement after the loop/switch
+- Does NOT exit outer loops in nested structures
+
+**Syntax:**
+
+```cpp
+break;  // No parameters, simple statement
+```
+
+**Important Notes:**
+
+- Only breaks the **innermost** loop containing it
+- To break outer loop, use flags or goto (discouraged) or restructure code
+- Common in: search algorithms, early termination, switch statements
 
 **Continue Statement:**
 
@@ -1388,6 +1627,52 @@ Print multiplication table skipping multiples of 3:
 5*1=5 5*2=10 5*4=20 5*5=25
 ```
 
+**Continue Statement Explained:**
+
+**What continue does:**
+
+- Skips the rest of current iteration
+- Jumps to the next iteration of the loop
+- In for loop: jumps to update statement, then checks condition
+- In while/do-while: jumps directly to condition check
+
+**Syntax:**
+
+```cpp
+continue;  // No parameters
+```
+
+**Break vs Continue:**
+
+| Feature             | break                     | continue                    |
+| ------------------- | ------------------------- | --------------------------- |
+| **Effect**          | Exits loop completely     | Skips to next iteration     |
+| **Use**             | Stop searching when found | Skip invalid/unwanted items |
+| **Execution after** | Statement after loop      | Next iteration of loop      |
+
+**Example Comparison:**
+
+```cpp
+// With break - stops at first even number
+for (int i = 1; i <= 10; i++) {
+    if (i % 2 == 0) break;
+    cout << i << " ";
+}
+// Output: 1
+
+// With continue - skips even numbers
+for (int i = 1; i <= 10; i++) {
+    if (i % 2 == 0) continue;
+    cout << i << " ";
+}
+// Output: 1 3 5 7 9
+```
+
+**Common Use Cases:**
+
+- **break**: Search found, error condition, early exit
+- **continue**: Skip invalid data, filtering, conditional processing
+
 ### 0.3.5 Goto Statement (Generally Avoided)
 
 **Goto Example (Educational Purpose):**
@@ -1440,10 +1725,18 @@ int main() {
 
 **Why Goto is Discouraged:**
 
-- Makes code hard to read and maintain
-- Can create "spaghetti code"
-- Modern C++ provides better alternatives (loops, functions)
-- Can lead to logical errors and infinite loops
+- Makes code hard to read and maintain ("spaghetti code")
+- Can create confusing control flow
+- Modern C++ provides better alternatives (loops, functions, exceptions)
+- Can lead to logical errors and bugs
+- Violates structured programming principles
+- Bypasses constructors/destructors when jumping
+
+**Acceptable Uses (Rare):**
+
+- Breaking out of deeply nested loops (though flags/functions are better)
+- Error handling in C (but C++ has exceptions)
+- Certain low-level or performance-critical code
 
 **Better Alternative using Functions:**
 
@@ -1555,10 +1848,49 @@ Circle area: 78.5397
 **Function Components:**
 
 1. **Return Type**: Data type of the value returned (void for no return)
-2. **Function Name**: Identifier to call the function
-3. **Parameters**: Input values (formal parameters)
-4. **Function Body**: Code to execute
+2. **Function Name**: Identifier to call the function (follow naming conventions)
+3. **Parameters**: Input values (formal parameters) - can be empty
+4. **Function Body**: Code to execute, enclosed in braces `{}`
 5. **Return Statement**: Value to return (optional for void functions)
+
+**Function Declaration vs Definition:**
+
+**Declaration (Prototype):**
+
+- Tells compiler function exists
+- Typically placed before main() or in header files
+- Syntax: `returnType functionName(parameterTypes);`
+- Example: `int add(int, int);`
+
+**Definition:**
+
+- Actual implementation of the function
+- Can be placed after main()
+- Contains the function body
+- Example:
+
+```cpp
+int add(int a, int b) {
+    return a + b;
+}
+```
+
+**Why use prototypes?**
+
+- Allows calling functions before they're defined
+- Enables organizing code (main first, implementations later)
+- Required for mutual recursion (functions calling each other)
+- Standard practice in larger programs
+
+**Function Call:**
+
+```cpp
+int result = add(5, 3);  // Arguments: 5 and 3
+```
+
+- Arguments are actual values passed
+- Must match parameter types and count
+- Evaluated left to right
 
 ### 0.4.2 Default Arguments
 
@@ -1649,6 +1981,58 @@ Custom pattern:
 # # # # # # # #
 ```
 
+**Default Arguments Explained:**
+
+**Rules for Default Arguments:**
+
+1. **Must be rightmost parameters**
+
+```cpp
+void func(int a, int b = 10);        // ✅ Valid
+void func(int a = 5, int b);         // ❌ Error!
+void func(int a = 5, int b = 10);    // ✅ Valid
+```
+
+2. **Specified in declaration, not definition**
+
+```cpp
+// Header file or before main
+void display(string name = "Guest");
+
+// Definition - don't repeat defaults
+void display(string name) {
+    cout << name;
+}
+```
+
+3. **Cannot skip middle arguments**
+
+```cpp
+func(int a, int b = 5, int c = 10);
+func(1);        // a=1, b=5, c=10 ✅
+func(1, 2);     // a=1, b=2, c=10 ✅
+func(1, , 3);   // ❌ Can't skip b
+```
+
+**Advantages:**
+
+- **Flexibility**: Same function with different parameter counts
+- **Backward compatibility**: Add new parameters without breaking existing calls
+- **Cleaner code**: Reduce function overloads for common cases
+
+**When to Use:**
+
+- Common default values (e.g., buffer size, precision)
+- Optional parameters (e.g., logging level, formatting options)
+- Extending existing functions without breaking code
+
+**Best Practices:**
+
+- Use meaningful defaults that make sense
+- Don't use for required parameters
+- Document what default values mean
+- Prefer overloading for complex scenarios
+
 ### 0.4.3 Inline Functions
 
 **Inline Function Example:**
@@ -1717,17 +2101,79 @@ int main() {
 }
 ```
 
+**Sample Output:**
+
+```
+Max of 10 and 20 is: 20
+Square of 5.5 is: 30.25
+Factorial of 5 is: 120
+Rectangle area: 75.6
+Rectangle perimeter: 35.4
+```
+
+**Inline Functions Explained:**
+
+**What is inline?**
+
+- Compiler **suggestion** to replace function call with function body
+- Eliminates function call overhead (stack operations, jumps)
+- Code is inserted at call site instead of jumping to function
+
+**Syntax:**
+
+```cpp
+inline int add(int a, int b) {
+    return a + b;
+}
+```
+
+**Inline vs Macros:**
+
+| Feature          | Inline Function      | Macro                      |
+| ---------------- | -------------------- | -------------------------- |
+| **Type Safety**  | ✅ Yes               | ❌ No                      |
+| **Debugging**    | ✅ Easy              | ❌ Difficult               |
+| **Side Effects** | ✅ Safe              | ❌ Can have issues         |
+| **Scoping**      | ✅ Follows C++ rules | ❌ Simple text replacement |
+
+**Example of macro problem:**
+
+```cpp
+#define SQUARE(x) x * x
+int result = SQUARE(2 + 3);  // Expands to: 2 + 3 * 2 + 3 = 11 (Wrong!)
+
+inline int square(int x) { return x * x; }
+int result = square(2 + 3);  // Correct: 25
+```
+
 **Benefits of Inline Functions:**
 
 - Eliminates function call overhead
 - Faster execution for small functions
 - Maintains type safety (unlike macros)
+- Better debugging (unlike macros)
 
 **When to Use Inline:**
 
-- Small, frequently called functions
-- Simple operations (getters, setters)
-- Functions with 1-3 lines of code
+- ✅ Small, frequently called functions (1-3 lines)
+- ✅ Simple operations (getters, setters)
+- ✅ Performance-critical code paths
+- ❌ Large functions (defeats purpose, code bloat)
+- ❌ Recursive functions (usually ignored by compiler)
+- ❌ Functions with loops (compiler likely ignores)
+
+**Important Notes:**
+
+- `inline` is a **hint**, not a command - compiler can ignore it
+- Modern compilers auto-inline without keyword
+- Class member functions defined inside class are implicitly inline
+- Over-inlining increases executable size (code bloat)
+
+**When to use which:**
+
+- **Small utility functions**: Use inline
+- **Complex logic**: Regular function
+- **Let compiler decide**: Often best - trust optimizer
 
 ### 0.4.4 Function Overloading
 
@@ -1843,6 +2289,87 @@ Box (5x4x3): 60
 Cylinder (r=2, h=5): 62.8318
 ```
 
+**Function Overloading Explained:**
+
+**What is Function Overloading?**
+
+- Multiple functions with **same name** but **different parameters**
+- Compiler selects the appropriate function based on arguments
+- Achieved through **name mangling** (compiler decorates function names)
+
+**Overloading Criteria (Must differ in at least one):**
+
+1. **Number of parameters**
+
+```cpp
+void func(int a);
+void func(int a, int b);  // ✅ Valid - different count
+```
+
+2. **Type of parameters**
+
+```cpp
+void func(int a);
+void func(double a);      // ✅ Valid - different type
+```
+
+3. **Order of parameters**
+
+```cpp
+void func(int a, double b);
+void func(double a, int b);  // ✅ Valid - different order
+```
+
+**CANNOT overload based on:**
+
+❌ **Return type only**
+
+```cpp
+int func(int a);
+double func(int a);  // ❌ Error - same parameters
+```
+
+❌ **Parameter names**
+
+```cpp
+void func(int x);
+void func(int y);    // ❌ Error - same signature
+```
+
+**Function Matching Process:**
+
+1. **Exact match**: Direct type match
+2. **Promotion**: char→int, float→double
+3. **Standard conversion**: int→double, pointer→bool
+4. **User-defined conversion**: Through constructors/operators
+5. **Ellipsis**: Variadic functions (...)
+
+**Ambiguity Example:**
+
+```cpp
+void func(int a);
+void func(double a);
+
+func(5);      // ✅ Calls int version
+func(5.0);    // ✅ Calls double version
+func('A');    // ✅ Calls int version (char promoted)
+// func(5.5f);  // ⚠️ Ambiguous (float can go to int or double)
+```
+
+**Benefits:**
+
+- **Code reusability**: Same name for similar operations
+- **Readability**: Intuitive function names
+- **Polymorphism**: Compile-time polymorphism
+- **Convenience**: Don't need different names for similar functions
+
+**Best Practices:**
+
+- Overload functions that perform similar operations
+- Maintain consistent behavior across overloads
+- Don't overload for unrelated functionality
+- Use default arguments when appropriate instead
+
 ### 0.4.5 Parameter Passing Mechanisms
 
 **Pass by Value:**
@@ -1866,6 +2393,22 @@ int main() {
     return 0;
 }
 ```
+
+**Output:**
+
+```
+Before function call: 50
+Inside function - before: 50
+Inside function - after: 100
+After function call: 50
+```
+
+**Pass by Value Explained:**
+
+- Creates a **copy** of the argument
+- Changes inside function don't affect original variable
+- Safe but can be inefficient for large objects
+- Default parameter passing mechanism in C++
 
 **Pass by Reference:**
 
@@ -1917,6 +2460,35 @@ int main() {
     return 0;
 }
 ```
+
+**Output:**
+
+```
+Before function call: 50
+Inside function - before: 50
+Inside function - after: 100
+After function call: 100
+
+Before swap: x = 10, y = 20
+After swap: x = 20, y = 10
+
+Array before: 1 2 3 4 5
+Array after: 1 2 99 4 5
+```
+
+**Pass by Reference Explained:**
+
+- Passes **reference** (alias) to original variable
+- Uses `&` symbol in parameter declaration
+- Changes affect the original variable
+- **No copy** made - efficient for large objects
+- Cannot pass literals or temporary values
+
+**When to Use:**
+
+- Need to modify original variable
+- Avoid copying large objects
+- Return multiple values (via reference parameters)
 
 **Pass by Pointer:**
 
@@ -2059,6 +2631,72 @@ int main() {
 }
 ```
 
+**Output:**
+
+```
+Original data[0]: 0
+After pass by value: 0
+After pass by reference: 999
+Sum of first 10 elements: 45
+```
+
+**Parameter Passing Comparison Table:**
+
+| Method                | Syntax                    | Modifies Original | Copy Made | Efficiency        | Safety         |
+| --------------------- | ------------------------- | ----------------- | --------- | ----------------- | -------------- |
+| **Pass by Value**     | `void func(int x)`        | ❌ No             | ✅ Yes    | ⚠️ Slow for large | ✅ Safe        |
+| **Pass by Reference** | `void func(int& x)`       | ✅ Yes            | ❌ No     | ✅ Fast           | ⚠️ Can modify  |
+| **Pass by Pointer**   | `void func(int* x)`       | ✅ Yes            | ❌ No     | ✅ Fast           | ⚠️ Can be null |
+| **Pass by Const Ref** | `void func(const int& x)` | ❌ No             | ❌ No     | ✅ Fast           | ✅ Safe        |
+
+**When to Use Each:**
+
+**Pass by Value:**
+
+- Small primitive types (int, char, double, bool)
+- Want to ensure original isn't modified
+- Need a modifiable local copy
+
+**Pass by Reference (&):**
+
+- Need to modify original variable
+- Large objects to avoid copying
+- Swap operations, in-place modifications
+
+**Pass by Pointer (\*):**
+
+- Optional parameters (can be nullptr)
+- Need pointer arithmetic
+- Working with arrays
+- C-style APIs
+- Can reassign what pointer points to
+
+**Pass by Const Reference (const &):**
+
+- ✅ **Most recommended for large objects**
+- Reading large objects without copying
+- String parameters, containers, custom objects
+- Best of both worlds: fast + safe
+
+**Best Practices:**
+
+```cpp
+// Primitives: by value
+void process(int value);
+
+// Large objects: by const reference
+void display(const string& text);
+void analyze(const vector<int>& data);
+
+// Need to modify: by reference
+void increment(int& value);
+void sort(vector<int>& data);
+
+// Optional or array: by pointer
+void optional(int* ptr);  // Can be nullptr
+void processArray(int* arr, int size);
+```
+
 ### 0.4.6 Recursion
 
 **Basic Recursion Examples:**
@@ -2185,6 +2823,159 @@ GCD(48, 18) = 6
 GCD(100, 25) = 25
 ```
 
+**Recursion Explained:**
+
+**What is Recursion?**
+
+- A function that **calls itself**
+- Breaks problem into smaller sub-problems
+- Must have **base case** (termination condition)
+- Must have **recursive case** (progress toward base case)
+
+**Anatomy of a Recursive Function:**
+
+```cpp
+returnType recursiveFunction(parameters) {
+    // Base case - stops recursion
+    if (baseCondition) {
+        return baseValue;
+    }
+
+    // Recursive case - calls itself
+    return recursiveFunction(modifiedParameters);
+}
+```
+
+**How Recursion Works:**
+
+Example: `factorial(4)`
+
+```
+factorial(4)
+  → 4 * factorial(3)
+      → 3 * factorial(2)
+          → 2 * factorial(1)
+              → 1  (base case)
+          → 2 * 1 = 2
+      → 3 * 2 = 6
+  → 4 * 6 = 24
+```
+
+**Stack Visualization:**
+
+```
+Call Stack (grows):           Return Stack (shrinks):
+factorial(4)                  factorial(4) → 24
+factorial(3)                  factorial(3) → 6
+factorial(2)                  factorial(2) → 2
+factorial(1) → returns 1      factorial(1) → 1
+```
+
+**Key Components:**
+
+1. **Base Case:**
+
+   - Simplest case with known answer
+   - Stops infinite recursion
+   - Multiple base cases are fine
+
+2. **Recursive Case:**
+   - Breaks problem into smaller piece
+   - Must progress toward base case
+   - Combines results of recursive calls
+
+**Types of Recursion:**
+
+**1. Linear Recursion:**
+
+```cpp
+int factorial(int n) {
+    if (n <= 1) return 1;
+    return n * factorial(n - 1);  // One recursive call
+}
+```
+
+**2. Binary Recursion:**
+
+```cpp
+int fibonacci(int n) {
+    if (n <= 1) return n;
+    return fibonacci(n-1) + fibonacci(n-2);  // Two recursive calls
+}
+```
+
+**3. Tail Recursion:**
+
+```cpp
+int factorialTail(int n, int acc = 1) {
+    if (n <= 1) return acc;
+    return factorialTail(n - 1, n * acc);  // Recursive call is last operation
+}
+```
+
+**Recursion vs Iteration:**
+
+| Feature         | Recursion                          | Iteration              |
+| --------------- | ---------------------------------- | ---------------------- |
+| **Readability** | Often cleaner for complex problems | Can be verbose         |
+| **Memory**      | Uses call stack (can overflow)     | Minimal memory         |
+| **Performance** | Slower (function call overhead)    | Faster                 |
+| **Use Cases**   | Trees, graphs, divide-conquer      | Simple loops, counters |
+
+**When to Use Recursion:**
+
+- ✅ Tree/graph traversal
+- ✅ Divide and conquer algorithms (merge sort, quick sort)
+- ✅ Backtracking problems
+- ✅ Mathematical definitions (factorial, Fibonacci)
+- ✅ When problem naturally divides into similar sub-problems
+
+**When to Avoid Recursion:**
+
+- ❌ Simple counting/iteration
+- ❌ Very deep recursion (stack overflow risk)
+- ❌ Performance-critical code
+- ❌ When iterative solution is equally clear
+
+**Common Pitfalls:**
+
+1. **Missing Base Case:**
+
+```cpp
+int bad(int n) {
+    return n * bad(n - 1);  // ❌ Infinite recursion!
+}
+```
+
+2. **Not Progressing to Base Case:**
+
+```cpp
+int bad(int n) {
+    if (n == 0) return 1;
+    return n * bad(n);  // ❌ Never reaches base case!
+}
+```
+
+3. **Stack Overflow:**
+
+```cpp
+factorial(100000);  // ⚠️ Too deep - stack overflow!
+```
+
+**Optimization: Memoization**
+
+```cpp
+#include <unordered_map>
+unordered_map<int, int> memo;
+
+int fibMemo(int n) {
+    if (n <= 1) return n;
+    if (memo.find(n) != memo.end()) return memo[n];
+    memo[n] = fibMemo(n-1) + fibMemo(n-2);
+    return memo[n];
+}
+```
+
 ---
 
 ## Phase 0.5: Pointers & References
@@ -2253,6 +3044,76 @@ arr[3] = 40 at address 0x7ffe5c8f4b3c
 arr[4] = 50 at address 0x7ffe5c8f4b40
 ```
 
+**Pointer Fundamentals Explained:**
+
+**What is a Pointer?**
+
+- A variable that stores a **memory address**
+- "Points to" another variable's location
+- Provides indirect access to data
+
+**Pointer Syntax:**
+
+```cpp
+int* ptr;       // Pointer to integer
+double* dptr;   // Pointer to double
+char* cptr;     // Pointer to character
+```
+
+**Key Operators:**
+
+**1. Address-of operator (&):**
+
+```cpp
+int x = 42;
+int* ptr = &x;  // ptr stores address of x
+```
+
+**2. Dereference operator (\*):**
+
+```cpp
+cout << *ptr;   // Access value at address (42)
+*ptr = 100;     // Modify value at address
+```
+
+**Pointer Declaration Styles:**
+
+```cpp
+int* ptr1;      // * next to type (recommended)
+int *ptr2;      // * next to variable
+int* p1, p2;    // ⚠️ p1 is pointer, p2 is int!
+int *p3, *p4;   // Both are pointers
+```
+
+**Memory Addresses:**
+
+- Every variable has an address in memory
+- Addresses are typically hexadecimal (0x...)
+- Size depends on system (4 bytes on 32-bit, 8 bytes on 64-bit)
+
+**Pointer Arithmetic:**
+
+- Adding to pointer moves to next element
+- `ptr + 1` moves by `sizeof(type)` bytes
+- `arr[i]` equivalent to `*(arr + i)`
+
+**Important Concepts:**
+
+**Pointer Size:**
+
+```cpp
+cout << sizeof(int*) << endl;    // 8 on 64-bit system
+cout << sizeof(double*) << endl; // 8 (same - all pointers same size)
+```
+
+**nullptr (Modern C++):**
+
+```cpp
+int* ptr = nullptr;  // ✅ Modern C++ (C++11)
+int* ptr = NULL;     // ⚠️ Old style (C-style)
+int* ptr = 0;        // ⚠️ Older style
+```
+
 ### 0.5.2 Types of Pointers
 
 **Different Pointer Types:**
@@ -2312,6 +3173,95 @@ int main() {
 }
 ```
 
+**Output:**
+
+```
+Null pointer value: 0
+Void pointer pointing to int: 42
+Void pointer pointing to char: A
+Void pointer pointing to double: 3.14
+Value through pointer to constant: 10
+Value through constant pointer: 30
+Value through const pointer to const: 30
+```
+
+**Pointer Types Explained:**
+
+**1. Null Pointer:**
+
+```cpp
+int* ptr = nullptr;  // Points to nothing (address 0)
+```
+
+- Indicates pointer doesn't point to valid memory
+- **Always initialize pointers** (to nullptr or valid address)
+- Check before dereferencing: `if (ptr != nullptr)`
+
+**2. Void Pointer (Generic Pointer):**
+
+```cpp
+void* vptr;  // Can point to any data type
+```
+
+- Type-agnostic pointer
+- Must cast before dereferencing
+- Used in generic programming, C-style APIs
+- **Cannot** be dereferenced directly
+- **Cannot** do pointer arithmetic
+
+**3. Wild Pointer (Uninitialized):**
+
+```cpp
+int* wildPtr;  // ❌ Dangerous - contains garbage address
+```
+
+- **Undefined behavior** if dereferenced
+- Always initialize: `int* ptr = nullptr;`
+
+**4. Pointer to Constant:**
+
+```cpp
+const int* ptr = &value;
+```
+
+- **Cannot modify** the value through pointer
+- **Can** change what it points to
+- Read-only access to data
+
+**5. Constant Pointer:**
+
+```cpp
+int* const ptr = &value;
+```
+
+- **Can modify** the value through pointer
+- **Cannot** change what it points to
+- Pointer address is fixed
+
+**6. Constant Pointer to Constant:**
+
+```cpp
+const int* const ptr = &value;
+```
+
+- **Cannot modify** the value
+- **Cannot** change what it points to
+- Both are constant
+
+**Const Pointer Rules (Read Right-to-Left):**
+
+```cpp
+const int* ptr;        // Pointer to const int
+int const* ptr;        // Same as above
+int* const ptr;        // Const pointer to int
+const int* const ptr;  // Const pointer to const int
+```
+
+**Mnemonic:**
+
+- `const` before `*`: Can't change **value**
+- `const` after `*`: Can't change **pointer**
+
 ### 0.5.3 Pointer to Pointer
 
 **Multi-level Pointers:**
@@ -2369,6 +3319,110 @@ int main() {
 }
 ```
 
+**Sample Output:**
+
+```
+Multi-level pointer example:
+Value: 100
+Through ptr: 100
+Through ptrToPtr: 100
+Through ptrToPtrToPtr: 100
+
+Addresses:
+Address of value: 0x7ffe5c8f4b4c
+Value in ptr: 0x7ffe5c8f4b4c
+Address of ptr: 0x7ffe5c8f4b40
+Value in ptrToPtr: 0x7ffe5c8f4b40
+Address of ptrToPtr: 0x7ffe5c8f4b38
+Value in ptrToPtrToPtr: 0x7ffe5c8f4b38
+
+Dynamic 2D array:
+1	2	3	4
+5	6	7	8
+9	10	11	12
+```
+
+**Pointer to Pointer Explained:**
+
+**Concept:**
+
+- Pointer that stores address of another pointer
+- Used for dynamic 2D arrays, pointer manipulation
+- Syntax: `int** ptr;` (two asterisks)
+
+**Levels of Indirection:**
+
+```cpp
+int value = 100;
+int* ptr = &value;        // 1 level: stores address of int
+int** ptrToPtr = &ptr;    // 2 levels: stores address of pointer
+int*** ptrToPtrToPtr = &ptrToPtr;  // 3 levels
+```
+
+**Accessing Values:**
+
+```cpp
+value           // Direct access: 100
+*ptr            // One dereference: 100
+**ptrToPtr      // Two dereferences: 100
+***ptrToPtrToPtr // Three dereferences: 100
+```
+
+**Memory Layout:**
+
+```
+Memory:
+[value: 100] ← [ptr: addr_of_value] ← [ptrToPtr: addr_of_ptr]
+```
+
+**Common Uses:**
+
+**1. Dynamic 2D Arrays:**
+
+```cpp
+int** matrix = new int*[rows];  // Array of pointers
+for (int i = 0; i < rows; i++) {
+    matrix[i] = new int[cols];  // Each pointer → array
+}
+```
+
+**2. Function Parameters (modify pointer):**
+
+```cpp
+void allocate(int** ptr) {
+    *ptr = new int(42);  // Modifies caller's pointer
+}
+```
+
+**3. Command Line Arguments:**
+
+```cpp
+int main(int argc, char** argv) {
+    // argv is array of strings (char*)
+}
+```
+
+**Pointer to Pointer Access:**
+
+```cpp
+int** ptr;
+ptr[i][j]    // Same as *(*(ptr + i) + j)
+```
+
+**Memory Management:**
+
+```cpp
+// Allocation
+int** arr = new int*[rows];
+for (int i = 0; i < rows; i++)
+    arr[i] = new int[cols];
+
+// Deallocation (reverse order!)
+for (int i = 0; i < rows; i++)
+    delete[] arr[i];  // Free each row
+delete[] arr;         // Free row pointers
+```
+
 ### 0.5.4 References
 
 **Reference Basics:**
@@ -2412,6 +3466,97 @@ int main() {
     return 0;
 }
 ```
+
+**Output:**
+
+```
+Original value: 42
+Reference value: 42
+Same address? Yes
+
+After modifying through reference:
+Original value: 100
+Reference value: 100
+
+Using pointer:
+Value: 10
+After reassignment: 20
+
+Using reference:
+Value: 10
+```
+
+**References Explained:**
+
+**What is a Reference?**
+
+- An **alias** (another name) for an existing variable
+- Must be initialized when declared
+- Cannot be reassigned to refer to another variable
+- Internally implemented as a constant pointer
+
+**Syntax:**
+
+```cpp
+int& ref = variable;  // Reference to int
+```
+
+**Key Differences: Reference vs Pointer**
+
+| Feature            | Reference       | Pointer              |
+| ------------------ | --------------- | -------------------- |
+| **Syntax**         | `int& ref`      | `int* ptr`           |
+| **Initialization** | Must initialize | Can be uninitialized |
+| **Reassignment**   | Cannot reassign | Can point elsewhere  |
+| **Null**           | Cannot be null  | Can be nullptr       |
+| **Dereferencing**  | Automatic       | Manual (\*ptr)       |
+| **Usage**          | `ref`           | `*ptr`               |
+| **Address**        | `&ref`          | `ptr` (is address)   |
+
+**Reference Rules:**
+
+1. **Must be initialized:**
+
+```cpp
+int& ref;           // ❌ Error!
+int& ref = value;   // ✅ Valid
+```
+
+2. **Cannot be reassigned:**
+
+```cpp
+int a = 10, b = 20;
+int& ref = a;       // ref refers to a
+ref = b;            // ❌ Doesn't rebind; assigns b's value to a
+```
+
+3. **Cannot be null:**
+
+```cpp
+int& ref = nullptr; // ❌ Error!
+```
+
+4. **Must refer to lvalue:**
+
+```cpp
+int& ref = 42;      // ❌ Error! (42 is rvalue)
+const int& ref = 42; // ✅ Valid (const ref can bind to rvalue)
+```
+
+**When to Use References:**
+
+- ✅ Function parameters (avoid copying)
+- ✅ Function return values (return by reference)
+- ✅ Range-based for loops
+- ✅ Operator overloading
+
+**When to Use Pointers:**
+
+- ✅ Optional parameters (can be nullptr)
+- ✅ Need to reassign what it points to
+- ✅ Dynamic memory allocation
+- ✅ Pointer arithmetic
+- ✅ Low-level programming
 
 **References in Functions:**
 
@@ -2484,6 +3629,54 @@ String: Hello, World!
 Array elements: 1 2 3 4 5
 ```
 
+**Reference Return Values:**
+
+**Returning References:**
+
+```cpp
+int& getElement(int arr[], int index) {
+    return arr[index];  // Returns reference to array element
+}
+```
+
+**Benefits:**
+
+- Can modify returned value: `getElement(arr, 2) = 99;`
+- Avoids copying large objects
+- Enables chaining: `obj.getValue() = 10;`
+
+**Dangers:**
+
+```cpp
+int& bad() {
+    int local = 42;
+    return local;  // ❌ Dangling reference! local is destroyed
+}
+```
+
+**Safe Reference Return:**
+
+```cpp
+class Container {
+    int data;
+public:
+    int& get() { return data; }  // ✅ Safe - data persists
+};
+```
+
+**Const Reference Parameters:**
+
+- Most efficient for read-only access to large objects
+- No copying, no modification
+- Best practice for strings, vectors, custom objects
+
+**Reference Tips:**
+
+- Use `const &` for input parameters (read-only)
+- Use `&` for output parameters (modify)
+- Never return reference to local variable
+- References are safer than pointers for most uses
+
 ### 0.5.5 Dynamic Memory Management
 
 **Basic Dynamic Allocation:**
@@ -2544,6 +3737,117 @@ int main() {
     return 0;
 }
 ```
+
+**Sample Output:**
+
+```
+Dynamic integer: 42
+Enter array size: 5
+Dynamic array elements: 10 20 30 40 50
+Memory allocation failed: std::bad_alloc
+Safe allocation failed - returned nullptr
+```
+
+**Dynamic Memory Explained:**
+
+**Stack vs Heap:**
+
+**Stack Memory:**
+
+- Automatic allocation/deallocation
+- Limited size (typically 1-8 MB)
+- Fast access
+- Lifetime tied to scope
+
+```cpp
+int x = 10;  // Stack - auto cleaned up
+```
+
+**Heap Memory:**
+
+- Manual allocation/deallocation
+- Large size (limited by system RAM)
+- Slower access
+- Persists until explicitly freed
+
+```cpp
+int* ptr = new int(10);  // Heap - must delete
+```
+
+**Dynamic Allocation Syntax:**
+
+**Single Variable:**
+
+```cpp
+int* ptr = new int;         // Allocate, uninitialized
+int* ptr = new int(42);     // Allocate and initialize
+int* ptr = new int{42};     // C++11 uniform initialization
+```
+
+**Arrays:**
+
+```cpp
+int* arr = new int[10];           // Array of 10 ints
+int* arr = new int[10]{1,2,3};    // Partially initialized
+```
+
+**Deallocation:**
+
+```cpp
+delete ptr;       // Free single variable
+delete[] arr;     // Free array (note the [])
+ptr = nullptr;    // Good practice
+```
+
+**new vs new[]:**
+
+- `new` → use `delete`
+- `new[]` → use `delete[]`
+- **Mixing causes undefined behavior!**
+
+**Error Handling:**
+
+**1. Exception (default):**
+
+```cpp
+try {
+    int* ptr = new int[huge_size];
+} catch (const std::bad_alloc& e) {
+    cout << "Allocation failed: " << e.what() << endl;
+}
+```
+
+**2. nothrow (returns nullptr):**
+
+```cpp
+int* ptr = new(nothrow) int[huge_size];
+if (ptr == nullptr) {
+    cout << "Allocation failed" << endl;
+} else {
+    delete[] ptr;
+}
+```
+
+**Memory Leaks:**
+
+```cpp
+// BAD - Memory leak
+int* ptr = new int(10);
+ptr = new int(20);  // Lost reference to first allocation!
+
+// GOOD - Free first, then reallocate
+delete ptr;
+ptr = new int(20);
+```
+
+**Best Practices:**
+
+1. **Always pair new with delete**
+2. **Set to nullptr after delete**
+3. **Check for nullptr before dereferencing**
+4. **Use smart pointers (modern C++)**
+5. **Prefer stack allocation when possible**
+6. **RAII: Resource Acquisition Is Initialization**
 
 **Dynamic 2D Arrays:**
 
@@ -2802,6 +4106,121 @@ int main() {
 }
 ```
 
+**Sample Output (with user input: 5 10 15 20 25):**
+
+```
+Enter 5 numbers for the array: 5 10 15 20 25
+Maximum: 25 at index 4
+Minimum: 5 at index 0
+Sum: 75
+Average: 15
+```
+
+**Array Fundamentals Explained:**
+
+**What is an Array?**
+
+- Collection of elements of the **same type**
+- Stored in **contiguous memory** locations
+- Fixed size (cannot grow/shrink after declaration)
+- Zero-indexed (first element at index 0)
+
+**Array Declaration Syntax:**
+
+```cpp
+dataType arrayName[size];
+```
+
+**Initialization Methods:**
+
+**1. Declaration only (garbage values):**
+
+```cpp
+int arr[5];  // Contains random values
+```
+
+**2. Full initialization:**
+
+```cpp
+int arr[5] = {1, 2, 3, 4, 5};  // All elements specified
+```
+
+**3. Partial initialization:**
+
+```cpp
+int arr[5] = {1, 2};  // arr = {1, 2, 0, 0, 0}
+```
+
+**4. Size inferred:**
+
+```cpp
+int arr[] = {1, 2, 3};  // Size automatically 3
+```
+
+**5. Uniform initialization (C++11):**
+
+```cpp
+int arr[5]{1, 2, 3, 4, 5};  // Modern style
+```
+
+**6. Zero initialization:**
+
+```cpp
+int arr[5] = {};   // All elements set to 0
+int arr[5]{};      // Same effect
+```
+
+**Array Access:**
+
+```cpp
+arr[0]    // First element
+arr[4]    // Last element (for size 5)
+arr[5]    // ❌ Out of bounds! Undefined behavior
+```
+
+**Array Size:**
+
+```cpp
+int size = sizeof(arr) / sizeof(arr[0]);
+// sizeof(arr): total bytes
+// sizeof(arr[0]): bytes per element
+// Result: number of elements
+```
+
+**Important Concepts:**
+
+**1. Arrays and Pointers:**
+
+- Array name is a pointer to first element
+- `arr` ≡ `&arr[0]`
+- `arr[i]` ≡ `*(arr + i)`
+
+**2. Passing Arrays to Functions:**
+
+```cpp
+void func(int arr[], int size) {  // Receives pointer
+    // Cannot use sizeof(arr) to get size!
+    // Must pass size separately
+}
+```
+
+**3. Array Bounds:**
+
+- C++ doesn't check array bounds
+- Accessing out-of-bounds is **undefined behavior**
+- Can cause crashes, data corruption, security vulnerabilities
+
+**4. Memory Layout:**
+
+```
+int arr[5] = {10, 20, 30, 40, 50};
+
+Memory:
+[10][20][30][40][50]
+ ↑   ↑   ↑   ↑   ↑
+arr arr+1 arr+2 arr+3 arr+4
+```
+
 **Array Operations:**
 
 ```cpp
@@ -2862,6 +4281,70 @@ int main() {
     return 0;
 }
 ```
+
+**Sample Output:**
+
+```
+Original array: 64 34 25 12 22 11 90 88 76 50
+Reversed array: 50 76 88 90 11 22 12 25 34 64
+Sorted array: 11 12 22 25 34 50 64 76 88 90
+Element 25 found at position 3
+Binary search result for 25: Found
+```
+
+**Array Operations Explained:**
+
+**Common Array Algorithms:**
+
+**1. Linear Search:**
+
+```cpp
+// O(n) time complexity
+for (int i = 0; i < size; i++) {
+    if (arr[i] == target) {
+        // Found at index i
+    }
+}
+```
+
+**2. Binary Search:**
+
+```cpp
+// O(log n) time - requires sorted array
+int left = 0, right = size - 1;
+while (left <= right) {
+    int mid = left + (right - left) / 2;
+    if (arr[mid] == target) return mid;
+    if (arr[mid] < target) left = mid + 1;
+    else right = mid - 1;
+}
+```
+
+**3. Reverse Array:**
+
+```cpp
+for (int i = 0; i < size/2; i++) {
+    swap(arr[i], arr[size-1-i]);
+}
+```
+
+**4. Find Min/Max:**
+
+```cpp
+int max = arr[0];
+for (int i = 1; i < size; i++) {
+    if (arr[i] > max) max = arr[i];
+}
+```
+
+**Using STL Algorithms:**
+
+- `sort(arr, arr + size)` - Sort array
+- `reverse(arr, arr + size)` - Reverse array
+- `find(arr, arr + size, value)` - Find element
+- `binary_search(arr, arr + size, value)` - Binary search
+- `min_element(arr, arr + size)` - Find minimum
+- `max_element(arr, arr + size)` - Find maximum
 
 ### 0.6.2 Multi-Dimensional Arrays
 
@@ -2979,6 +4462,174 @@ int main() {
 }
 ```
 
+**Sample Output:**
+
+```
+Matrix (3x4):
+   1   2   3   4
+   5   6   7   8
+   9  10  11  12
+
+Partial initialization matrix:
+   1   2   0
+   3   0   0
+   4   5   6
+
+Enter elements for 2x3 matrix:
+Enter element [0][0]: 1
+Enter element [0][1]: 2
+Enter element [0][2]: 3
+Enter element [1][0]: 4
+Enter element [1][1]: 5
+Enter element [1][2]: 6
+Your matrix:
+   1   2   3
+   4   5   6
+
+Matrix A:
+   1   2
+   3   4
+Matrix B:
+   5   6
+   7   8
+A + B:
+   6   8
+  10  12
+A * B:
+  19  22
+  43  50
+```
+
+**Multi-Dimensional Arrays Explained:**
+
+**What is a 2D Array?**
+
+- Array of arrays (rows and columns)
+- Stored in row-major order in memory
+- Syntax: `type arrayName[rows][cols];`
+
+**Memory Layout:**
+
+```cpp
+int arr[2][3] = {{1,2,3}, {4,5,6}};
+
+Logical view:
+1 2 3
+4 5 6
+
+Physical memory:
+[1][2][3][4][5][6]  // Stored contiguously
+```
+
+**Accessing Elements:**
+
+```cpp
+arr[0][0]  // First element (row 0, col 0)
+arr[1][2]  // Element at row 1, col 2
+arr[i][j]  // General access
+```
+
+**Initialization:**
+
+**1. Full initialization:**
+
+```cpp
+int arr[2][3] = {
+    {1, 2, 3},
+    {4, 5, 6}
+};
+```
+
+**2. Flat initialization:**
+
+```cpp
+int arr[2][3] = {1, 2, 3, 4, 5, 6};  // Same result
+```
+
+**3. Partial initialization:**
+
+```cpp
+int arr[2][3] = {{1}, {2}};
+// Result:
+// 1 0 0
+// 2 0 0
+```
+
+**Traversing 2D Array:**
+
+```cpp
+// Row-major (row by row)
+for (int i = 0; i < rows; i++) {
+    for (int j = 0; j < cols; j++) {
+        cout << arr[i][j];
+    }
+}
+```
+
+**Matrix Operations:**
+
+**Addition:**
+
+```cpp
+for (int i = 0; i < rows; i++)
+    for (int j = 0; j < cols; j++)
+        result[i][j] = a[i][j] + b[i][j];
+```
+
+**Multiplication (A[m×n] × B[n×p] = C[m×p]):**
+
+```cpp
+for (int i = 0; i < m; i++)
+    for (int j = 0; j < p; j++)
+        for (int k = 0; k < n; k++)
+            c[i][j] += a[i][k] * b[k][j];
+```
+
+**Transpose:**
+
+```cpp
+for (int i = 0; i < rows; i++)
+    for (int j = 0; j < cols; j++)
+        transpose[j][i] = arr[i][j];
+```
+
+**Passing 2D Arrays to Functions:**
+
+**Method 1: Fixed columns:**
+
+```cpp
+void func(int arr[][COLS], int rows) {
+    // COLS must be known at compile time
+}
+```
+
+**Method 2: Pointer to array:**
+
+```cpp
+void func(int (*arr)[COLS], int rows) {
+    // Same as Method 1
+}
+```
+
+**Method 3: Pointer to pointer (dynamic):**
+
+```cpp
+void func(int** arr, int rows, int cols) {
+    // For dynamically allocated arrays
+}
+```
+
+**Higher Dimensions:**
+
+```cpp
+int arr3D[2][3][4];  // 3D array
+arr3D[i][j][k]       // Access
+
+// Visualization:
+// 2 matrices
+// Each matrix is 3×4
+```
+
 ### 0.6.3 Character Arrays and C-Strings
 
 **Character Array Basics:**
@@ -3052,6 +4703,185 @@ int main() {
     return 0;
 }
 ```
+
+**Sample Output:**
+
+```
+name1: Hello
+name2: World
+Enter your name: John
+Hello, John!
+Enter your full name: John Doe
+Full name: John Doe
+
+String lengths:
+Length of str1: 5
+Length of str2: 5
+After copying str1 to str3: Hello
+After concatenating: Hello World
+str1 comes before str2 alphabetically
+
+Original: Hello World
+Uppercase: HELLO WORLD
+```
+
+**C-Strings (Character Arrays) Explained:**
+
+**What is a C-String?**
+
+- Array of characters terminated by null character `'\0'`
+- Legacy from C language
+- Still used in C++ for compatibility
+
+**C-String Structure:**
+
+```cpp
+char str[] = "Hello";
+// Stored as: ['H']['e']['l']['l']['o']['\0']
+//             str[0] through str[5]
+```
+
+**Key Difference from Arrays:**
+
+- Regular array: `int arr[5]` has 5 elements
+- C-string: `char str[6] = "Hello"` has 5 chars + 1 null terminator
+
+**C-String Declaration:**
+
+**1. String literal:**
+
+```cpp
+char str[] = "Hello";  // Size automatically 6 (5 + '\0')
+```
+
+**2. Character by character:**
+
+```cpp
+char str[6] = {'H', 'e', 'l', 'l', 'o', '\0'};
+```
+
+**3. Fixed size:**
+
+```cpp
+char str[20] = "Hello";  // Reserves 20, uses 6
+```
+
+**4. Without initialization:**
+
+```cpp
+char str[20];  // Garbage values
+```
+
+**Input Methods:**
+
+**1. cin >> (stops at whitespace):**
+
+```cpp
+char name[50];
+cin >> name;  // Reads until space/newline
+```
+
+**2. cin.getline() (reads entire line):**
+
+```cpp
+char name[50];
+cin.getline(name, 50);  // Reads up to 49 chars + '\0'
+```
+
+**3. gets() (DANGEROUS - deprecated):**
+
+```cpp
+gets(name);  // ❌ Buffer overflow risk! Don't use!
+```
+
+**C-String Functions (from <cstring>):**
+
+| Function                | Purpose                     | Example                       |
+| ----------------------- | --------------------------- | ----------------------------- |
+| `strlen(str)`           | Get length (excluding '\0') | `strlen("Hello")` → 5         |
+| `strcpy(dest, src)`     | Copy string                 | `strcpy(s1, "Hi")`            |
+| `strncpy(dest, src, n)` | Copy n chars                | `strncpy(s1, "Hi", 2)`        |
+| `strcat(dest, src)`     | Concatenate                 | `strcat(s1, s2)`              |
+| `strncat(dest, src, n)` | Concatenate n chars         | `strncat(s1, s2, 3)`          |
+| `strcmp(s1, s2)`        | Compare (0 if equal)        | `strcmp("A", "B")` → negative |
+| `strchr(str, ch)`       | Find character              | `strchr("Hello", 'e')`        |
+| `strstr(s1, s2)`        | Find substring              | `strstr("Hello", "ll")`       |
+
+**strcmp() Return Values:**
+
+```cpp
+strcmp("abc", "abc")  // 0 (equal)
+strcmp("abc", "xyz")  // < 0 (first comes before second)
+strcmp("xyz", "abc")  // > 0 (first comes after second)
+```
+
+**Common Operations:**
+
+**Get Length:**
+
+```cpp
+int len = strlen(str);  // Don't count '\0'
+```
+
+**Copy String:**
+
+```cpp
+strcpy(dest, source);  // Overwrites dest
+```
+
+**Concatenate:**
+
+```cpp
+strcat(str1, str2);  // Appends str2 to str1
+```
+
+**Compare:**
+
+```cpp
+if (strcmp(str1, str2) == 0) {
+    // Strings are equal
+}
+```
+
+**Convert Case:**
+
+```cpp
+for (int i = 0; str[i] != '\0'; i++) {
+    str[i] = toupper(str[i]);  // To uppercase
+    str[i] = tolower(str[i]);  // To lowercase
+}
+```
+
+**Security Issues with C-Strings:**
+
+**Buffer Overflow:**
+
+```cpp
+char small[5];
+strcpy(small, "This is too long");  // ❌ Buffer overflow!
+```
+
+**Safe Alternative:**
+
+```cpp
+strncpy(small, source, sizeof(small) - 1);
+small[sizeof(small) - 1] = '\0';  // Ensure null termination
+```
+
+**Why Use std::string Instead:**
+
+- ✅ No buffer overflow concerns
+- ✅ Dynamic sizing
+- ✅ Rich set of methods
+- ✅ Operator overloading (+, ==, etc.)
+- ✅ RAII (automatic memory management)
+
+**When to Use C-Strings:**
+
+- Interfacing with C libraries
+- Legacy code maintenance
+- Low-level programming
+- Performance-critical fixed-size strings
 
 ### 0.6.4 C++ String Class
 
@@ -3277,6 +5107,107 @@ Apple comes before Banana alphabetically
 Sorted words: apple banana cherry zebra
 Tokens: apple banana cherry date
 ```
+
+**std::string Methods Explained:**
+
+**Constructors:**
+
+```cpp
+string()                    // Empty string
+string(const char* s)       // From C-string
+string(size_t n, char c)   // n copies of character c
+string(const string& str)   // Copy constructor
+```
+
+**Capacity:**
+
+```cpp
+size() / length()  // Number of characters
+empty()           // Returns true if empty
+capacity()        // Allocated storage
+reserve(n)        // Reserve space for n characters
+resize(n)         // Resize to n characters
+clear()           // Remove all characters
+```
+
+**Element Access:**
+
+```cpp
+str[i]           // Access char at index i (no bounds check)
+str.at(i)        // Access with bounds checking (throws exception)
+str.front()      // First character
+str.back()       // Last character
+str.c_str()      // Get C-string (const char*)
+```
+
+**Modifiers:**
+
+```cpp
+str += "text"         // Append
+str.append("text")    // Append
+str.push_back('c')    // Append single character
+str.pop_back()        // Remove last character
+str.insert(pos, "x")  // Insert at position
+str.erase(pos, len)   // Remove len characters from pos
+str.replace(pos, len, "new")  // Replace
+str.clear()           // Remove all
+```
+
+**String Operations:**
+
+```cpp
+str.substr(pos, len)    // Extract substring
+str.find("text")        // Find first occurrence
+str.rfind("text")       // Find last occurrence
+str.find_first_of(chars)  // Find any char from set
+str.find_last_of(chars)   // Find last char from set
+str.compare(str2)       // Compare strings
+```
+
+**Find Return Value:**
+
+- Returns `string::npos` if not found
+- `npos` is a special value (typically -1 or max size_t)
+- Always check: `if (pos != string::npos)`
+
+**String Comparison:**
+
+```cpp
+str1 == str2   // Equality
+str1 != str2   // Inequality
+str1 < str2    // Lexicographic comparison
+str1.compare(str2)  // Returns <0, 0, or >0
+```
+
+**Iterators:**
+
+```cpp
+str.begin()    // Iterator to first char
+str.end()      // Iterator to past-the-end
+str.rbegin()   // Reverse iterator
+str.rend()     // Reverse end
+```
+
+**String vs C-String:**
+
+| Feature           | std::string           | C-String             |
+| ----------------- | --------------------- | -------------------- |
+| **Size**          | Dynamic               | Fixed                |
+| **Safety**        | Bounds-checked (at()) | No checking          |
+| **Memory**        | Automatic             | Manual               |
+| **Operations**    | Rich methods          | Limited functions    |
+| **Concatenation** | `+` operator          | `strcat()`           |
+| **Comparison**    | `==` operator         | `strcmp()`           |
+| **Length**        | O(1)                  | O(n) with `strlen()` |
+
+**Best Practices:**
+
+- ✅ Use `std::string` for all string operations
+- ✅ Use `.at()` for checked access during development
+- ✅ Use `[]` for performance-critical code (after validation)
+- ✅ Reserve capacity if size is known: `str.reserve(1000)`
+- ✅ Use `const string&` for function parameters
+- ✅ Use `string_view` (C++17) for read-only string references
 
 ---
 
@@ -3632,6 +5563,111 @@ int main() {
 }
 ```
 
+**Sample Output:**
+
+```
+=== malloc/free vs new/delete ===
+
+--- Using malloc/free ---
+malloc'd integer: 100
+malloc'd array: 0 10 20 30 40
+
+--- Using new/delete ---
+new'd integer: 200
+new'd array: 10 20 30 40 50
+
+--- Object Allocation ---
+Using malloc for object (BAD PRACTICE):
+malloc'd object value (garbage): 0
+
+Using new for object (CORRECT):
+TestClass constructor called with value = 500
+new'd object value: 500
+TestClass destructor called, value = 500
+
+Array of objects:
+TestClass constructor called, value = 42
+TestClass constructor called, value = 42
+TestClass constructor called, value = 42
+TestClass destructor called, value = 42
+TestClass destructor called, value = 42
+TestClass destructor called, value = 42
+```
+
+**malloc/free vs new/delete Explained:**
+
+**Key Differences:**
+
+| Feature              | malloc/free       | new/delete         |
+| -------------------- | ----------------- | ------------------ |
+| **Language**         | C                 | C++                |
+| **Type**             | Function          | Operator           |
+| **Constructor**      | ❌ No             | ✅ Yes             |
+| **Destructor**       | ❌ No             | ✅ Yes             |
+| **Type Safety**      | ⚠️ Requires cast  | ✅ Type-safe       |
+| **Size Calculation** | Manual (`sizeof`) | Automatic          |
+| **Initialization**   | Manual            | Built-in           |
+| **Failure**          | Returns NULL      | Throws `bad_alloc` |
+| **Overloadable**     | ❌ No             | ✅ Yes             |
+
+**Why new/delete is Better for C++:**
+
+1. **Automatic Constructor/Destructor Calls:**
+
+```cpp
+class MyClass {
+    MyClass() { /* initialization */ }
+    ~MyClass() { /* cleanup */ }
+};
+
+MyClass* obj = new MyClass();  // ✅ Constructor called
+delete obj;                     // ✅ Destructor called
+```
+
+2. **Type Safety:**
+
+```cpp
+int* p1 = new int;              // ✅ Type-safe
+int* p2 = (int*)malloc(sizeof(int));  // ⚠️ Requires cast
+```
+
+3. **Automatic Size Calculation:**
+
+```cpp
+int* arr = new int[10];         // ✅ No sizeof needed
+int* arr = (int*)malloc(10 * sizeof(int));  // ⚠️ Manual calculation
+```
+
+4. **Initialization:**
+
+```cpp
+int* p = new int(42);           // ✅ Initialize to 42
+int* p = (int*)malloc(sizeof(int));  // Garbage value
+*p = 42;                        // Manual initialization
+```
+
+**When to Use Each:**
+
+**Use new/delete:**
+
+- ✅ All C++ code with objects
+- ✅ When constructors/destructors needed
+- ✅ Type-safe allocations
+- ✅ Modern C++ (prefer smart pointers)
+
+**Use malloc/free:**
+
+- C library interfacing
+- Legacy C code
+- Low-level memory manipulation
+- Specific memory alignment requirements
+
+**Critical Rules:**
+
+1. ❌ Never mix: `new` with `free` or `malloc` with `delete`
+2. ✅ `new` → `delete`, `new[]` → `delete[]`
+3. ✅ `malloc` → `free`
+
 ### 0.7.4 Memory Leaks and Dangling Pointers
 
 **Common Memory Problems:**
@@ -3849,6 +5885,71 @@ int main() {
 }
 ```
 
+**Sample Output:**
+
+```
+=== Auto Storage Class ===
+Auto type deduction:
+autoInt: 42 (size: 4)
+autoDouble: 3.14 (size: 8)
+autoString: Hello (size: 8)
+First element via auto iterator: 1
+Lambda result: 8
+Modified value through auto reference: 200
+Range-based for with auto: 1 2 3 4 5
+```
+
+**Auto Keyword Explained:**
+
+**What is auto? (C++11)**
+
+- Compiler automatically deduces variable type from initializer
+- Type determined at compile-time (not runtime)
+- Reduces verbosity with complex types
+- Must be initialized when declared
+
+**Type Deduction Rules:**
+
+```cpp
+auto x = 42;          // int
+auto y = 3.14;        // double
+auto z = "text";      // const char*
+auto s = string("text"); // string
+auto& ref = x;        // int&
+const auto c = 10;    // const int
+auto* ptr = &x;       // int*
+```
+
+**Benefits:**
+
+- ✅ Cleaner code with long type names
+- ✅ Type safety maintained
+- ✅ Easier refactoring
+- ✅ Essential for lambda types
+
+**When to Use:**
+
+```cpp
+// Complex iterator types
+auto it = myMap.begin();  // Instead of std::map<int,string>::iterator
+
+// Lambda expressions
+auto lambda = [](int x) { return x * 2; };
+
+// Range-based for loops
+for (auto& element : container) { }
+
+// Template return types
+auto result = complexTemplateFunction();
+```
+
+**Caveats:**
+
+```cpp
+auto x = {1, 2, 3};  // Deduced as std::initializer_list<int>
+auto y = "text";     // const char*, not std::string
+```
+
 ### 0.8.2 Static Storage Class
 
 **Static Variables and Functions:**
@@ -3937,6 +6038,100 @@ int main() {
 }
 ```
 
+**Sample Output:**
+
+```
+=== Static Storage Class ===
+
+--- Static Local Variable ---
+Function called 1 times
+Function called 2 times
+Function called 3 times
+Function called 4 times
+Function called 5 times
+
+--- Static Global Variable ---
+Static global value: 100
+Modified static global: 200
+
+--- Static Function ---
+This is a static function
+
+--- Static Class Members ---
+Initial object count: 0
+Counter object 1 created. Total objects: 1
+Counter object 2 created. Total objects: 2
+Object ID: 1, Total objects: 2
+Object ID: 2, Total objects: 2
+Object count from static function: 2
+Counter object 1 destroyed
+Counter object 2 destroyed
+Object count after destruction: 2
+```
+
+**Static Storage Class Explained:**
+
+**Three Uses of static:**
+
+**1. Static Local Variables:**
+
+```cpp
+void function() {
+    static int count = 0;  // Initialized ONCE
+    count++;               // Persists between calls
+}
+```
+
+- **Lifetime**: Entire program duration
+- **Scope**: Limited to function
+- Initialized only once (first call)
+- Retains value between function calls
+
+**2. Static Global Variables/Functions:**
+
+```cpp
+static int globalVar = 100;    // Internal linkage
+static void helper() { }       // Internal linkage
+```
+
+- **Linkage**: Internal (file scope only)
+- Not visible to other translation units
+- Prevents naming conflicts between files
+
+**3. Static Class Members:**
+
+```cpp
+class MyClass {
+    static int count;  // Shared by all objects
+    static void func(); // Can be called without object
+};
+```
+
+- **Shared by all instances** of the class
+- Exists even if no objects created
+- Accessed via `ClassName::member`
+
+**Static Member Variables:**
+
+- Must be defined outside class
+- One copy shared by all objects
+- Use cases: counters, shared configuration
+
+**Static Member Functions:**
+
+- Can be called without an object instance
+- Can only access static members
+- Cannot use `this` pointer
+- Syntax: `ClassName::functionName()`
+
+**Comparison:**
+
+| Type              | Lifetime | Scope    | Linkage  |
+| ----------------- | -------- | -------- | -------- |
+| **Static Local**  | Program  | Function | N/A      |
+| **Static Global** | Program  | File     | Internal |
+| **Static Member** | Program  | Class    | Class    |
+
 ### 0.8.3 Extern Storage Class
 
 **File1.cpp (External definitions):**
@@ -4011,6 +6206,83 @@ int main() {
 }
 ```
 
+**Sample Output:**
+
+```
+=== Extern Storage Class ===
+External global variable: 42
+External global double: 3.14
+This function demonstrates external linkage
+C-style function with C linkage
+Accessing global var from block scope: 42
+Global var after modification: 100
+```
+
+**Extern Storage Class Explained:**
+
+**What is extern?**
+
+- Declares a variable/function defined in another file
+- Provides **external linkage**
+- Does NOT allocate memory (declaration, not definition)
+- Allows sharing across multiple files
+
+**Declaration vs Definition:**
+
+```cpp
+// Declaration (tells compiler it exists somewhere)
+extern int globalVar;
+
+// Definition (allocates memory)
+int globalVar = 42;
+```
+
+**Multi-File Usage:**
+
+**file1.cpp:**
+
+```cpp
+int sharedData = 100;  // Definition
+void sharedFunction() { }  // Definition
+```
+
+**file2.cpp:**
+
+```cpp
+extern int sharedData;  // Declaration
+extern void sharedFunction();  // Declaration (optional for functions)
+
+void useShared() {
+    cout << sharedData;  // Uses variable from file1.cpp
+}
+```
+
+**extern "C" Linkage:**
+
+```cpp
+extern "C" {
+    void cFunction();  // C linkage (no name mangling)
+}
+```
+
+- Used for C library interfacing
+- Prevents C++ name mangling
+- Required when calling C code from C++
+
+**Key Points:**
+
+- Functions have external linkage by default
+- Variables need `extern` for cross-file access
+- One definition rule: define once, declare many times
+- Header files typically contain `extern` declarations
+
+**Best Practices:**
+
+- Put `extern` declarations in header files
+- Put definitions in source files
+- Avoid global variables when possible
+- Use namespaces to organize globals
+
 ### 0.8.4 Register Storage Class (Deprecated)
 
 **Register Keyword (Mostly Historical):**
@@ -4041,6 +6313,48 @@ int main() {
     return 0;
 }
 ```
+
+**Output:**
+
+```
+=== Register Storage Class (Deprecated) ===
+Register variable: 42
+Compiler-optimized variable: 100
+
+Note: 'register' keyword is deprecated in modern C++
+Compilers are better at optimization than manual hints
+```
+
+**Register Keyword Explained:**
+
+**What was register?**
+
+- Hint to compiler to store variable in CPU register
+- Intended for frequently accessed variables
+- Faster access than RAM
+
+**Why it's Deprecated:**
+
+- Modern compilers are smarter at optimization
+- Compilers ignore the hint anyway
+- Prevents taking variable's address
+- Clutters code without benefits
+
+**Modern Approach:**
+
+```cpp
+// Don't do this
+register int fast = 10;
+
+// Just do this - compiler will optimize
+int fast = 10;
+```
+
+**Compiler Optimization:**
+
+- Compilers automatically use registers
+- Profile-guided optimization
+- Trust the compiler's decisions
 
 ### 0.8.5 Mutable Storage Class
 
@@ -4144,6 +6458,136 @@ int main() {
     return 0;
 }
 ```
+
+**Sample Output:**
+
+```
+=== Mutable Storage Class ===
+
+--- Cacheable Data Example ---
+First access: Data processed and cached
+Processed: Hello World
+Second access: Returning cached data
+Processed: Hello World
+Is cached: Yes
+
+--- Counter Example ---
+Value: 42
+Value: 42
+Value: 42
+Access count: 3
+
+--- Mutable in Lambda ---
+Original x: 10
+Lambda call 1: 11
+Lambda call 2: 12
+Original x after lambda calls: 10
+```
+
+**Mutable Keyword Explained:**
+
+**What is mutable?**
+
+- Allows modification of class member in `const` member functions
+- Breaks const-correctness for specific members
+- Used for internal state that doesn't affect logical const-ness
+
+**Syntax:**
+
+```cpp
+class Example {
+    mutable int cache;  // Can modify in const functions
+    int data;          // Cannot modify in const functions
+
+    void func() const {
+        cache = 10;    // ✅ Allowed
+        // data = 20;  // ❌ Error!
+    }
+};
+```
+
+**Common Use Cases:**
+
+**1. Caching:**
+
+```cpp
+class Expensive {
+    mutable bool cached;
+    mutable Result cachedResult;
+
+    Result compute() const {
+        if (!cached) {
+            cachedResult = expensiveOperation();
+            cached = true;
+        }
+        return cachedResult;
+    }
+};
+```
+
+**2. Reference Counting:**
+
+```cpp
+class String {
+    mutable int refCount;
+
+    void addRef() const {
+        ++refCount;  // Allowed because mutable
+    }
+};
+```
+
+**3. Debugging/Logging:**
+
+```cpp
+class Data {
+    mutable int accessCount;
+
+    int getValue() const {
+        ++accessCount;  // Track accesses
+        return value;
+    }
+};
+```
+
+**4. Mutex/Locks:**
+
+```cpp
+class ThreadSafe {
+    mutable std::mutex mtx;
+
+    void read() const {
+        std::lock_guard<std::mutex> lock(mtx);  // OK with mutable
+    }
+};
+```
+
+**Mutable in Lambdas:**
+
+```cpp
+int x = 10;
+auto lambda = [x]() mutable {
+    x++;     // Modifies lambda's copy
+    return x;
+};
+```
+
+- Without `mutable`, captured-by-value variables are const
+- `mutable` allows modifying the lambda's copy
+
+**When to Use:**
+
+- Internal bookkeeping (counters, timestamps)
+- Caching computed values
+- Thread synchronization
+- Debugging/profiling
+- Does NOT change logical const-ness
+
+**When NOT to Use:**
+
+- Modifying actual object state
+- Breaking const contracts
+- As a workaround for poor design
 
 ### 0.8.6 Scope and Lifetime
 
