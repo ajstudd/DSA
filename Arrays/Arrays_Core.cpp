@@ -153,6 +153,11 @@ int main()
     // Accumulate (sum)
     int sum = accumulate(v.begin(), v.end(), 0);
 
+    vector<int> vect(5); // Create a vector of size 5
+
+    // Fill the vector with increasing values starting from 1
+    iota(vect.begin(), vect.end(), 1);
+
     // converting traditional arrays to vector
     int t_array[] = {1, 2, 3, 4, 5};
     vector<int> vect(t_array, t_array + sizeof(t_array) / sizeof(t_array[0]));

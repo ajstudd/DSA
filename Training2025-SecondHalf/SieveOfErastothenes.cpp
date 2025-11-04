@@ -9,8 +9,10 @@ void sieve(vector<int> &primes)
     {
         if (primes[i] == 1)
         {
+            cout << "num: " << i << endl;
             for (int j = i * i; j < primes.size(); j += i)
             {
+                cout << "converting: " << j << endl;
                 primes[j] = 0;
             }
         }

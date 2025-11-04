@@ -123,7 +123,7 @@ int main()
     bool found = binary_search(v.begin(), v.end(), 4); // Binary search
     cout << endl;
 
-    // map: Associative arrays for key-value pairs
+    // map: Associative arrays for key-value pairs, items will be stores in sorted order
     map<string, int> age;
     age["Alice"] = 25;
     age["Bob"] = 30;
@@ -257,6 +257,9 @@ int main()
     ss << num;
     string numStr = ss.str();
     cout << "String converted from int: " << numStr << endl;
+    // can also use to_string
+    string to_str;
+    to_str = to_string(num);
 
     // tuple: Grouping multiple values
     tuple<int, string, double> person = make_tuple(25, "Alice", 70.5);
@@ -314,6 +317,7 @@ int main()
     // 2. PRIORITY QUEUE (MAX HEAP and MIN HEAP)
     cout << "\n=== Priority Queue ===\n";
     // Max heap (default)
+    // value of each parent node is greater than or equal to the values of its children
     priority_queue<int> maxHeap;
     maxHeap.push(3);
     maxHeap.push(1);
@@ -321,6 +325,7 @@ int main()
     cout << "Max heap top: " << maxHeap.top() << endl;
 
     // Min heap
+    // value of each parent node is less than or equal to the values of its children
     priority_queue<int, vector<int>, greater<int>> minHeap;
     minHeap.push(3);
     minHeap.push(1);
@@ -356,6 +361,9 @@ int main()
 
     // 5. MULTISET and MULTIMAP
     cout << "\n=== Multiset ===\n";
+    // A multiset in C++ is an associative container from the Standard Template Library (STL)
+    // that stores elements in a sorted order, similar to a set.
+    // The key distinction is that, unlike a set, a multiset allows for the storage of duplicate elements.
     multiset<int> ms;
     ms.insert(1);
     ms.insert(1);
@@ -396,6 +404,14 @@ int main()
     }
 
     // Transform to uppercase/lowercase
+    char upperChar = 'A';
+    char lowerChar = tolower(upperChar);
+    cout << "Lowercase of 'A': " << lowerChar << endl; // Output: a
+
+    char lowerChar = 'b';
+    char upperChar = toupper(lowerChar);
+    cout << "Uppercase of 'b': " << upperChar << endl; // Output: B
+
     string upperStr = "hello";
     transform(upperStr.begin(), upperStr.end(), upperStr.begin(), ::toupper);
     cout << "Uppercase: " << upperStr << endl;
