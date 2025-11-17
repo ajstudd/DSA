@@ -1,4 +1,9 @@
 #include <iostream>
+using namespace std;
+
+// Given an array of positive and negative integers,
+// rearrange the array such that positive and negative numbers are placed alternately.
+// The order of appearance should be maintained (relative order of positive numbers among themselves and negative numbers among themselves should be preserved).
 
 void rearrangeAlternate(int arr[], int n)
 {
@@ -8,7 +13,7 @@ void rearrangeAlternate(int arr[], int n)
     {
         if (arr[j] < 0)
         {
-            std::swap(arr[i], arr[j]);
+            swap(arr[i], arr[j]);
             i++;
         }
         j++;
@@ -17,7 +22,7 @@ void rearrangeAlternate(int arr[], int n)
     int pos = i, neg = 0;
     while (pos < n && neg < pos && arr[neg] < 0)
     {
-        std::swap(arr[neg], arr[pos]);
+        swap(arr[neg], arr[pos]);
         pos++;
         neg += 2;
     }
@@ -30,10 +35,10 @@ int main()
 
     rearrangeAlternate(arr, n);
 
-    std::cout << "Rearranged Array: ";
+    cout << "Rearranged Array: ";
     for (int i = 0; i < n; i++)
     {
-        std::cout << arr[i] << " ";
+        cout << arr[i] << " ";
     }
 
     return 0;
