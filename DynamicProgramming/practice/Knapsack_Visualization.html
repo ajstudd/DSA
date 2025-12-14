@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0/1 Knapsack Algorithm Visualization</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .input-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input[type="number"],
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="number"]:focus,
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .items-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .item-card {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .item-card.picked {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .item-card.not-picked {
+            background: #f1f1f1;
+            color: #999;
+            border-color: #ccc;
+        }
+
+        .item-number {
+            font-size: 0.9em;
+            color: #888;
+            margin-bottom: 5px;
+        }
+
+        .item-card.picked .item-number {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .item-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .item-weight {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        .item-card.picked .item-weight {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background 0.3s, transform 0.1s;
+        }
+
+        button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .controls {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .visualization-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .recursion-tree, .dp-table-container {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .tree-node {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 5px;
+            display: inline-block;
+            min-width: 120px;
+            text-align: center;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .tree-node.current {
+            background: #ffd700;
+            border-color: #ff8c00;
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+        }
+
+        .tree-node.memoized {
+            background: #90EE90;
+            border-color: #228B22;
+        }
+
+        .tree-node.completed {
+            background: #e0e0e0;
+            border-color: #999;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .knapsack-visual {
+            background: white;
+            border: 3px solid #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 150px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .capacity-bar {
+            background: #f0f0f0;
+            height: 40px;
+            border-radius: 20px;
+            position: relative;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .capacity-fill {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            border-radius: 20px;
+            transition: width 0.5s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .capacity-label {
+            text-align: center;
+            margin-top: 5px;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .current-state {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .current-state h3 {
+            color: #ff8c00;
+            margin-bottom: 10px;
+        }
+
+        .state-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            font-size: 0.95em;
+        }
+
+        .state-item {
+            background: white;
+            padding: 8px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .state-item strong {
+            color: #667eea;
+        }
+
+        .log-container {
+            background: #2d2d2d;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+
+        .log-entry {
+            margin: 3px 0;
+            padding: 2px 0;
+        }
+
+        .log-entry.pick {
+            color: #90EE90;
+        }
+
+        .log-entry.notpick {
+            color: #FFB6C1;
+        }
+
+        .log-entry.memo {
+            color: #87CEEB;
+        }
+
+        .final-result {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+            display: none;
+        }
+
+        .final-result.show {
+            display: block;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .speed-control {
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .speed-control label {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        .speed-control input[type="range"] {
+            width: 200px;
+            vertical-align: middle;
+        }
+
+        @media (max-width: 768px) {
+            .visualization-area {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>0/1 Knapsack Algorithm Visualizer</h1>
+        <p class="subtitle">Dynamic Programming with Memoization</p>
+
+        <div class="input-section">
+            <div class="input-group">
+                <label for="capacity">Knapsack Capacity (W):</label>
+                <input type="number" id="capacity" value="50" min="1" max="100">
+            </div>
+            <div class="input-group">
+                <label for="values">Item Values (comma-separated):</label>
+                <input type="text" id="values" placeholder="e.g., 60, 100, 120" value="60, 100, 120">
+            </div>
+            <div class="input-group">
+                <label for="weights">Item Weights (comma-separated):</label>
+                <input type="text" id="weights" placeholder="e.g., 10, 20, 30" value="10, 20, 30">
+            </div>
+        </div>
+
+        <div class="controls">
+            <button onclick="initializeKnapsack()">Initialize</button>
+            <button onclick="startVisualization()" id="startBtn" disabled>Start Visualization</button>
+            <button onclick="pauseVisualization()" id="pauseBtn" disabled>Pause</button>
+            <button onclick="resetVisualization()" id="resetBtn" disabled>Reset</button>
+        </div>
+
+        <div class="speed-control">
+            <label for="speed">Animation Speed:</label>
+            <input type="range" id="speed" min="100" max="2000" value="1000" step="100">
+            <span id="speedValue">1000ms</span>
+        </div>
+
+        <div class="items-container" id="itemsContainer"></div>
+
+        <div class="current-state" id="currentState" style="display: none;">
+            <h3>Current Decision</h3>
+            <div class="state-info" id="stateInfo"></div>
+        </div>
+
+        <div class="knapsack-visual">
+            <h3 style="margin-bottom: 15px; color: #667eea;">Knapsack Status</h3>
+            <div class="capacity-bar">
+                <div class="capacity-fill" id="capacityFill">0 / 0</div>
+            </div>
+            <div class="capacity-label" id="capacityLabel">Current Weight: 0 / Max Capacity: 0</div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-label">Recursive Calls</div>
+                <div class="stat-value" id="recursiveCalls">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Memoization Hits</div>
+                <div class="stat-value" id="memoHits">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Current Item</div>
+                <div class="stat-value" id="currentItem">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Current Value</div>
+                <div class="stat-value" id="currentValue">0</div>
+            </div>
+        </div>
+
+        <div class="final-result" id="finalResult">
+            <h2 style="margin-bottom: 10px;">🎉 Maximum Value Achieved!</h2>
+            <div class="stat-value" id="finalValue">0</div>
+            <p style="margin-top: 10px;">Selected Items: <span id="selectedItems"></span></p>
+        </div>
+
+        <div class="log-container" id="logContainer">
+            <div class="log-entry">Algorithm log will appear here...</div>
+        </div>
+    </div>
+
+    <script>
+        let capacity = 50;
+        let values = [];
+        let weights = [];
+        let items = [];
+        let dp = [];
+        let recursiveCalls = 0;
+        let memoHits = 0;
+        let currentMaxValue = 0;
+        let animationSpeed = 1000;
+        let isPaused = false;
+        let isRunning = false;
+        let executionLog = [];
+        let selectedItemsIndices = [];
+
+        document.getElementById('speed').addEventListener('input', function() {
+            animationSpeed = parseInt(this.value);
+            document.getElementById('speedValue').value = animationSpeed + 'ms';
+        });
+
+        function initializeKnapsack() {
+            capacity = parseInt(document.getElementById('capacity').value);
+            
+            const valuesInput = document.getElementById('values').value;
+            const weightsInput = document.getElementById('weights').value;
+            
+            values = valuesInput.split(',').map(v => parseInt(v.trim()));
+            weights = weightsInput.split(',').map(w => parseInt(w.trim()));
+
+            if (values.length !== weights.length) {
+                alert('Number of values and weights must match!');
+                return;
+            }
+
+            items = values.map((val, idx) => ({
+                value: val,
+                weight: weights[idx],
+                index: idx
+            }));
+
+            displayItems();
+            resetStats();
+            
+            document.getElementById('startBtn').disabled = false;
+            document.getElementById('resetBtn').disabled = false;
+            
+            addLog('Knapsack initialized with capacity: ' + capacity, 'memo');
+            addLog('Items: ' + items.length, 'memo');
+        }
+
+        function displayItems() {
+            const container = document.getElementById('itemsContainer');
+            container.innerHTML = '';
+            
+            items.forEach((item, idx) => {
+                const card = document.createElement('div');
+                card.className = 'item-card';
+                card.id = 'item-' + idx;
+                card.innerHTML = `
+                    <div class="item-number">Item ${idx + 1}</div>
+                    <div class="item-value">$${item.value}</div>
+                    <div class="item-weight">${item.weight} kg</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function resetStats() {
+            recursiveCalls = 0;
+            memoHits = 0;
+            currentMaxValue = 0;
+            executionLog = [];
+            selectedItemsIndices = [];
+            
+            document.getElementById('recursiveCalls').textContent = '0';
+            document.getElementById('memoHits').textContent = '0';
+            document.getElementById('currentItem').textContent = '-';
+            document.getElementById('currentValue').textContent = '0';
+            document.getElementById('logContainer').innerHTML = '<div class="log-entry">Ready to start...</div>';
+            document.getElementById('finalResult').classList.remove('show');
+            
+            updateCapacityBar(0);
+        }
+
+        function updateCapacityBar(currentWeight) {
+            const percentage = (currentWeight / capacity) * 100;
+            const fill = document.getElementById('capacityFill');
+            fill.style.width = percentage + '%';
+            fill.textContent = currentWeight + ' / ' + capacity;
+            document.getElementById('capacityLabel').textContent = 
+                `Current Weight: ${currentWeight} kg / Max Capacity: ${capacity} kg`;
+        }
+
+        function updateCurrentState(index, currentWt, pick, notPick) {
+            const stateDiv = document.getElementById('currentState');
+            stateDiv.style.display = 'block';
+            
+            const stateInfo = document.getElementById('stateInfo');
+            stateInfo.innerHTML = `
+                <div class="state-item">
+                    <strong>Item:</strong> ${index >= items.length ? 'None' : index + 1}
+                </div>
+                <div class="state-item">
+                    <strong>Current Weight:</strong> ${currentWt} kg
+                </div>
+                <div class="state-item">
+                    <strong>Pick Value:</strong> ${pick}
+                </div>
+                <div class="state-item">
+                    <strong>Not Pick Value:</strong> ${notPick}
+                </div>
+                <div class="state-item">
+                    <strong>Decision:</strong> ${pick > notPick ? 'PICK' : 'NOT PICK'}
+                </div>
+            `;
+        }
+
+        function addLog(message, type = '') {
+            const logContainer = document.getElementById('logContainer');
+            const entry = document.createElement('div');
+            entry.className = 'log-entry ' + type;
+            entry.textContent = '> ' + message;
+            logContainer.appendChild(entry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+
+        async function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function maxPossibleSum(index, currentWt) {
+            if (isPaused) {
+                while (isPaused && isRunning) {
+                    await sleep(100);
+                }
+            }
+
+            if (!isRunning) return 0;
+
+            recursiveCalls++;
+            document.getElementById('recursiveCalls').textContent = recursiveCalls;
+            document.getElementById('currentItem').textContent = index >= items.length ? 'Done' : (index + 1);
+
+            addLog(`Checking index ${index}, currentWt: ${currentWt}`, '');
+
+            // Check memoization
+            if (dp[index] && dp[index][currentWt] !== undefined && dp[index][currentWt] !== -1) {
+                memoHits++;
+                document.getElementById('memoHits').textContent = memoHits;
+                addLog(`Memoization hit at [${index}][${currentWt}] = ${dp[index][currentWt]}`, 'memo');
+                return dp[index][currentWt];
+            }
+
+            await sleep(animationSpeed);
+
+            // Base case
+            if (index >= items.length) {
+                addLog(`Base case reached at index ${index}`, 'notpick');
+                if (!dp[index]) dp[index] = [];
+                dp[index][currentWt] = 0;
+                return 0;
+            }
+
+            // Not pick
+            addLog(`Option 1: NOT picking item ${index + 1}`, 'notpick');
+            const notPick = await maxPossibleSum(index + 1, currentWt);
+
+            // Pick
+            let pick = 0;
+            if (currentWt + items[index].weight <= capacity) {
+                addLog(`Option 2: PICKING item ${index + 1} (value: ${items[index].value}, weight: ${items[index].weight})`, 'pick');
+                const itemCard = document.getElementById('item-' + index);
+                if (itemCard) itemCard.classList.add('picked');
+                
+                updateCapacityBar(currentWt + items[index].weight);
+                
+                pick = items[index].value + await maxPossibleSum(index + 1, currentWt + items[index].weight);
+                
+                if (itemCard && pick <= notPick) {
+                    itemCard.classList.remove('picked');
+                    itemCard.classList.add('not-picked');
+                }
+            } else {
+                addLog(`Cannot pick item ${index + 1} - would exceed capacity`, 'notpick');
+            }
+
+            const result = Math.max(pick, notPick);
+            
+            if (!dp[index]) dp[index] = [];
+            dp[index][currentWt] = result;
+
+            currentMaxValue = Math.max(currentMaxValue, result);
+            document.getElementById('currentValue').textContent = currentMaxValue;
+
+            updateCurrentState(index, currentWt, pick, notPick);
+            addLog(`Max value at [${index}][${currentWt}] = ${result}`, 'memo');
+
+            await sleep(animationSpeed / 2);
+
+            return result;
+        }
+
+        function tracebackSolution() {
+            selectedItemsIndices = [];
+            let index = 0;
+            let currentWt = 0;
+
+            while (index < items.length) {
+                const currentValue = dp[index][currentWt];
+                const notPickValue = dp[index + 1] && dp[index + 1][currentWt] !== undefined ? 
+                    dp[index + 1][currentWt] : 0;
+
+                if (currentWt + items[index].weight <= capacity) {
+                    const pickValue = items[index].value + 
+                        (dp[index + 1] && dp[index + 1][currentWt + items[index].weight] !== undefined ? 
+                         dp[index + 1][currentWt + items[index].weight] : 0);
+
+                    if (pickValue > notPickValue) {
+                        selectedItemsIndices.push(index);
+                        currentWt += items[index].weight;
+                    }
+                }
+                index++;
+            }
+
+            // Highlight selected items
+            items.forEach((item, idx) => {
+                const card = document.getElementById('item-' + idx);
+                if (card) {
+                    card.classList.remove('picked', 'not-picked');
+                    if (selectedItemsIndices.includes(idx)) {
+                        card.classList.add('picked');
+                    }
+                }
+            });
+        }
+
+        async function startVisualization() {
+            if (isRunning) return;
+            
+            isRunning = true;
+            isPaused = false;
+            document.getElementById('startBtn').disabled = true;
+            document.getElementById('pauseBtn').disabled = false;
+
+            // Reset DP table
+            dp = Array(items.length + 1).fill(null).map(() => ({}));
+            resetStats();
+
+            addLog('Starting knapsack algorithm...', 'memo');
+
+            const result = await maxPossibleSum(0, 0);
+
+            if (isRunning) {
+                addLog(`FINAL RESULT: Maximum value = ${result}`, 'pick');
+                document.getElementById('finalValue').textContent = '$' + result;
+                
+                tracebackSolution();
+                
+                const selectedItemsText = selectedItemsIndices
+                    .map(idx => `Item ${idx + 1} ($${items[idx].value}, ${items[idx].weight}kg)`)
+                    .join(', ');
+                document.getElementById('selectedItems').textContent = 
+                    selectedItemsText || 'None';
+                
+                document.getElementById('finalResult').classList.add('show');
+            }
+
+            isRunning = false;
+            document.getElementById('startBtn').disabled = false;
+            document.getElementById('pauseBtn').disabled = true;
+        }
+
+        function pauseVisualization() {
+            isPaused = !isPaused;
+            document.getElementById('pauseBtn').textContent = isPaused ? 'Resume' : 'Pause';
+            addLog(isPaused ? 'Paused' : 'Resumed', 'memo');
+        }
+
+        function resetVisualization() {
+            isRunning = false;
+            isPaused = false;
+            document.getElementById('startBtn').disabled = false;
+            document.getElementById('pauseBtn').disabled = true;
+            document.getElementById('pauseBtn').textContent = 'Pause';
+            
+            displayItems();
+            resetStats();
+            document.getElementById('currentState').style.display = 'none';
+        }
+
+        // Initialize on page load
+        window.onload = function() {
+            initializeKnapsack();
+        };
+    </script>
+</body>
+</html>
